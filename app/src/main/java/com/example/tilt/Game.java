@@ -9,9 +9,11 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public abstract class Game extends AppCompatActivity implements SensorEventListener  {
     protected ScoreKeeper sk = new ScoreKeeper();
-    protected int currStage;
+    protected Stage currStage;
+    private int index;
     protected List<Stage> stageList = new ArrayList<>();
 
     public abstract void start();
@@ -20,14 +22,11 @@ public abstract class Game extends AppCompatActivity implements SensorEventListe
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        //Log.d("CURRENT STAGE", currStage+"");
-        int t = currStage;
-        int r = this.stageList.get(currStage).solve(sensorEvent);
-        Log.d("RET", r+"");
-        this.nextStage(r);
-        if(t != currStage){
-            this.stageList.get(currStage).onCreate(); // If the Stage has changed, reconfigure.
+        if(currStage == null){
+            currStage = stageList.get(index);
         }
+        int r = currStage.solve(sensorEvent);
+        this.nextStage(r);
     }
 
     @Override
@@ -35,7 +34,18 @@ public abstract class Game extends AppCompatActivity implements SensorEventListe
         // Do nothing, I have no clue what this does.
     }
 
-    public void nextStage(int index){
-        this.currStage = index;
+    /**
+     *
+     * @param i
+     */
+    public void nextStage(int i){
+        if(i != 0) {
+            Log.d("NEXTSTAGE", i + "");
+            this.index = this.index + i;
+            if(this.index <= stageList.size()-1){
+                currStage = stageList.get(this.index);
+                currStage.onCreate();
+            }
+        }
     }
 }

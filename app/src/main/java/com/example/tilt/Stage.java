@@ -27,6 +27,7 @@ public class Stage {
         this.fail = fail;
         this.onCreate();
     }
+
     /**
      * Tries to solve the stage.
      * @param event, the SensorEvent, should always be evaluated if it is the correct
@@ -48,10 +49,12 @@ public class Stage {
 
     // TODO: Make this thing work. Might have to move it or make it public.
     public void onCreate(){
+        for(Detector d : failures){
+            d.configure();
+        }
         solution.configure();
         // Configure the solution, e.g. set current direction and such.
         // Set the stage's display.
         // Play the sound.
-
     }
 }

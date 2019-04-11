@@ -7,7 +7,7 @@ import android.util.Log;
 
 public class ShakeDetector implements Detector {
     private static final float SHAKE_THRESHOLD_GRAVITY = 2.7F;
-    private static final int SHAKE_SLOP_TIME_MS = 500;
+    private static final int SHAKE_SLOP_TIME_MS = 500; // Maybe go faster?
 
     private long mShakeTimestamp = 0;
 

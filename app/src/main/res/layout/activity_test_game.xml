@@ -13,7 +13,6 @@
         android:layout_marginStart="161dp"
         android:layout_marginTop="139dp"
         android:text="Button"
-        android:onClick="end"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

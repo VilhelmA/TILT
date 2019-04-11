@@ -13,7 +13,6 @@ public class StageBuilder {
     private String sound;
     private String display;
     private int fail;
-    private List<Sensor> sensors = new ArrayList<>();
 
     public StageBuilder sound(String sound){
         this.sound = sound;
@@ -44,6 +43,7 @@ public class StageBuilder {
         this.fail = fail;
         return this;
     }
+
 
     public Stage build(){
         return new Stage(this.sound, this.display, this.solution, this.failures, this.fail);
