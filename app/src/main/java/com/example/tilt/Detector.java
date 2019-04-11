@@ -5,4 +5,6 @@ import android.hardware.SensorEvent;
 public interface Detector {
 
     boolean detectEvent(SensorEvent event);
+
+    void configure();
 }

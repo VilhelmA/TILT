@@ -26,7 +26,7 @@ public class StageBuilder {
     }
 
     public StageBuilder solution(Detector e){
-        this.solution = solution;
+        this.solution = e;
         return this;
     }
 
@@ -42,16 +42,6 @@ public class StageBuilder {
 
     public StageBuilder fail(int fail){
         this.fail = fail;
-        return this;
-    }
-
-    public StageBuilder sensor(Sensor s){
-        this.sensors.add(s);
-        return this;
-    }
-
-    public StageBuilder sensor(List<Sensor> sensors){
-        this.sensors.addAll(sensors);
         return this;
     }
 

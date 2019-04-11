@@ -13,27 +13,33 @@ import java.util.ArrayList;
 
 public class testGameActivity extends Game {
     private SensorManager sensorManager;
-    private Sensor sensor;
+    private Sensor accelSensor;
+    private Sensor magnoSensor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_game);
+
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_GAME);
-        stageList = new ArrayList<Stage>();
+        accelSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        magnoSensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+
+        sensorManager.registerListener(this, accelSensor, SensorManager.SENSOR_DELAY_GAME);
+        sensorManager.registerListener(this,magnoSensor, SensorManager.SENSOR_DELAY_GAME);
+
         StageBuilder builder = new StageBuilder();
-        builder.fail(0).solution(new ShakeDetector());
-        Stage s = new Stage(null, null, new ShakeDetector(), new ArrayList<Detector>(), 0);
-        stageList.add(s);
+        stageList.add(builder.fail(0).solution(new AngleDetector(0, 20)).build());
+        //stageList.add(builder.fail(0).solution(new ShakeDetector()).build());
+
+        Log.d("Stages", stageList.size() +"");
         this.start();
     }
 
     public void end(View v){
         this.end();
         TextView tv = findViewById(R.id.textView);
-        tv.setText(currstage+"");
+        tv.setText(currStage);
         this.start();
     }
     @Override

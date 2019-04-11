@@ -1,6 +1,5 @@
 package com.example.tilt;
 
-import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import java.util.List;
 
@@ -11,7 +10,6 @@ public class Stage {
     private Detector solution;
     private List<Detector> failures;
     private int fail;
-
 
     /**
      *
@@ -41,7 +39,7 @@ public class Stage {
 
         for (Detector d: failures) {
             if(d.detectEvent(event)) {
-                return fail;
+                return -fail;
             }
         }
 
@@ -49,8 +47,11 @@ public class Stage {
     }
 
     // TODO: Make this thing work. Might have to move it or make it public.
-    private void onCreate(){
+    public void onCreate(){
+        solution.configure();
+        // Configure the solution, e.g. set current direction and such.
         // Set the stage's display.
         // Play the sound.
+
     }
 }

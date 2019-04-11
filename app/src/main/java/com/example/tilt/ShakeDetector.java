@@ -13,7 +13,7 @@ public class ShakeDetector implements Detector {
 
     @Override
     public boolean detectEvent(SensorEvent event) {
-        Log.d("Hello", "Now in detectEvent");
+        Log.d("DETECTOR", "SENSING SHAKES");
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             float x = event.values[0];
             float y = event.values[1];
@@ -38,5 +38,10 @@ public class ShakeDetector implements Detector {
             }
         }
         return false;
+    }
+
+    @Override
+    public void configure() {
+        Log.d("STARTED STAGE", "SHAKE");
     }
 }
