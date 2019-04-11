@@ -4,12 +4,15 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+
+import java.util.List;
 
 
 public abstract class Game extends AppCompatActivity implements SensorEventListener  {
     protected ScoreKeeper sk;
-    private int currstage;
-    //private List<Stage> stageList;
+    protected int currstage;
+    protected List<Stage> stageList;
 
     public Game(){
         this.sk = new ScoreKeeper();
@@ -21,7 +24,8 @@ public abstract class Game extends AppCompatActivity implements SensorEventListe
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-       // this.nextStage(this.stageList.get(currstage).solve(sensorEvent));
+        Log.d("MYTAG", currstage+"");
+        this.nextStage(this.stageList.get(currstage).solve(sensorEvent));
     }
 
 

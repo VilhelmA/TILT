@@ -8,8 +8,8 @@ import java.util.List;
 
 
 public class StageBuilder {
-    private List<SensorEvent> failures = new ArrayList<>();
-    private SensorEvent solution;
+    private List<Detector> failures = new ArrayList<>();
+    private Detector solution;
     private String sound;
     private String display;
     private int fail;
@@ -25,17 +25,17 @@ public class StageBuilder {
         return this;
     }
 
-    public StageBuilder solution(SensorEvent e){
+    public StageBuilder solution(Detector e){
         this.solution = solution;
         return this;
     }
 
-    public StageBuilder failure(SensorEvent e) {
+    public StageBuilder failure(Detector e) {
         this.failures.add(e);
         return this;
     }
 
-    public StageBuilder failure(List<SensorEvent> failures){
+    public StageBuilder failure(List<Detector> failures){
         failures.addAll(failures);
         return this;
     }
@@ -56,7 +56,7 @@ public class StageBuilder {
     }
 
     public Stage build(){
-        return new Stage(this.sound, this.display, this.solution, this.failures, this.sensors, this.fail);
+        return new Stage(this.sound, this.display, this.solution, this.failures, this.fail);
     }
 
 

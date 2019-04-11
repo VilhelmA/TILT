@@ -8,9 +8,8 @@ import java.util.List;
 public class Stage {
     private String sound;
     private String display;
-    private SensorEvent solution;
-    private List<SensorEvent> failures;
-    private List<Sensor> sensors;
+    private Detector solution;
+    private List<Detector> failures;
     private int fail;
 
 
@@ -20,16 +19,14 @@ public class Stage {
      * @param display
      * @param solution
      * @param failures
-     * @param sensors
      * @param fail
      */
-    public Stage(String sound, String display, SensorEvent solution, List<SensorEvent> failures, List<Sensor> sensors, int fail){
+    public Stage(String sound, String display, Detector solution, List<Detector> failures, int fail){
         this.sound = sound;
         this.display = display;
         this.solution = solution;
         this.failures = failures;
         this.fail = fail;
-        this.sensors = sensors;
         this.onCreate();
     }
     /**
@@ -38,37 +35,17 @@ public class Stage {
      * @return int, 1 if successful, 0, if nothing happened, -X if unsuccessful, where X is the number of steps backwards.
      */
     public int solve(SensorEvent event){
-        if(this.isCorrectEvent(event)){
-            for(SensorEvent e : failures){
-                if(e.equals(event)){
-                    return fail;
-                }
-            }
-            if(event.equals(this.solution)){
-                return 1;
+        if(solution.detectEvent(event)) {
+            return 1;
+        }
+
+        for (Detector d: failures) {
+            if(d.detectEvent(event)) {
+                return fail;
             }
         }
 
         return 0;
-    }
-
-    /**
-     * Checks if the SensorEvent is one of the valid types, that is to say, either a failure or a success.
-     * @param e, the SensorEvent that is to be evaluated.
-     * @return true, if the SensorEvent is a valid event. False, if it is not.
-     */
-    protected boolean isCorrectEvent(SensorEvent e){
-        for (SensorEvent f : failures) {
-            if(f.sensor.getType() == e.sensor.getType()){
-                return true;
-            }
-        }
-
-        if(this.solution.sensor.getType() == e.sensor.getType()){
-            return true;
-        }
-
-        return false;
     }
 
     // TODO: Make this thing work. Might have to move it or make it public.
