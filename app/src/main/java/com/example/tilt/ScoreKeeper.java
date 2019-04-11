@@ -20,7 +20,16 @@ public class ScoreKeeper {
      * @return Duration, the duration which the player tried to solve the puzzle.
      */
     public Duration end(){
-        return Duration.between(this.startTime, Instant.now()); // API level warnings
+        Instant now = Instant.now();
+        return Duration.between(this.startTime, now); // API level warnings
+    }
+
+    /**
+     * Increases the number of errors with X
+     * @param x
+     */
+    public void increase(int x){
+        this.noOfErrors = this.noOfErrors + x;
     }
 
     /**

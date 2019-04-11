@@ -3,19 +3,15 @@ package com.example.tilt;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
+import android.support.v7.app.AppCompatActivity;
 
-import java.util.ArrayList;
-import java.util.List;
 
-public abstract class Game implements SensorEventListener {
+public abstract class Game extends AppCompatActivity implements SensorEventListener  {
     protected ScoreKeeper sk;
-    private String name;
     private int currstage;
-    private List<Stage> stageList;
+    //private List<Stage> stageList;
 
-    public Game(String name, List<Stage> stageList){
-        this.stageList = stageList;
-        this.name = name;
+    public Game(){
         this.sk = new ScoreKeeper();
     }
 
@@ -25,8 +21,9 @@ public abstract class Game implements SensorEventListener {
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        this.nextStage(this.stageList.get(currstage).solve(sensorEvent));
+       // this.nextStage(this.stageList.get(currstage).solve(sensorEvent));
     }
+
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {

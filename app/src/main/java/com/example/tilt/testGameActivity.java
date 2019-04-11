@@ -1,27 +1,32 @@
 package com.example.tilt;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
 
-public class testGameActivity extends AppCompatActivity {
-    private Game g;
+public class testGameActivity extends Game {
 
-    private List<Stage> stages;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_game);
-        this.stages = new ArrayList<>();
-        this.createStages();
-        this.g = new TestGame("Test", stages);
-        this.g.start();
+        this.start();
     }
 
-    private void createStages(){
-        // Create all the stages in here using the StageBuilder below and add them to the stages List.
-        StageBuilder stageBuilder = new StageBuilder();
+    public void end(View v){
+        this.end();
+        TextView tv = findViewById(R.id.textView);
+        tv.setText(this.sk.end().getSeconds()+ " ");
+        this.start();
+    }
+    @Override
+    public void start() {
+        this.sk.start();
+    }
+
+    @Override
+    public void end() {
+        this.sk.end();
     }
 }

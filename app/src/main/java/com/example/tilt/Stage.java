@@ -59,12 +59,12 @@ public class Stage {
      */
     protected boolean isCorrectEvent(SensorEvent e){
         for (SensorEvent f : failures) {
-            if(f.getClass().equals(e.getClass())){
+            if(f.sensor.getType() == e.sensor.getType()){
                 return true;
             }
         }
 
-        if(solution.getClass().equals(e.getClass())){
+        if(this.solution.sensor.getType() == e.sensor.getType()){
             return true;
         }
 

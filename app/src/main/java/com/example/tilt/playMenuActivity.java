@@ -1,5 +1,6 @@
 package com.example.tilt;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import java.util.List;
 
 public class playMenuActivity extends AppCompatActivity {
     private String[] puzzleNames = {"Spin to Win", "Dark room", "Funky Gravity"}; // Tillfällig ersättare för en framtida Factory.
+    private String selected = "testGameActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,11 @@ public class playMenuActivity extends AppCompatActivity {
                 display.setText(s);
             }
         };
+    }
+
+    public void startGame(View v){
+        Intent i = new Intent(this, testGameActivity.class);
+        startActivity(i);
     }
 
     private List<String> getPuzzles(){
