@@ -9,6 +9,7 @@ public class AngleDetector implements Detector {
     private float successDeg;
     private int accuracy;
 
+    // TODO: Make this work, maybe have it update so that keeps an account of how much the phone has rotated instead of having a startDeg.
     /**
      * Class for detecting if the phone has been pointed in the correct angle.
      * @param successDeg, the angle which we should look for.

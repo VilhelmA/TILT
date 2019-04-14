@@ -3,8 +3,6 @@ package com.example.tilt;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
 
@@ -27,9 +25,15 @@ public class testGameActivity extends Game {
         sensorManager.registerListener(this, magnoSensor, SensorManager.SENSOR_DELAY_GAME);
 
         StageBuilder builder = new StageBuilder();
+        stageList.add(builder.fail(0).solution(new OrientationDetector(OrientationDetector.UPSIDEDOWN, 1)).build());
+        stageList.add(builder.fail(0).solution(new OrientationDetector(OrientationDetector.VERTICAL, 1)).build());
+        stageList.add(builder.fail(0).solution(new OrientationDetector(OrientationDetector.LEFT90DEG, 1)).build());
+        stageList.add(builder.fail(0).solution(new OrientationDetector(OrientationDetector.RIGHT90DEG, 1)).build());
+
         stageList.add(builder.fail(0).solution(new AngleDetector(0, 3)).build());
         stageList.add(builder.fail(0).solution(new ShakeDetector()).build());
         stageList.add(builder.fail(0).solution(new AngleDetector(0, 5)).build());
+        this.start();
     }
 
     @Override
@@ -39,6 +43,8 @@ public class testGameActivity extends Game {
 
     @Override
     public void end() {
-        this.sk.end();
+        TextView tv = findViewById(R.id.textView);
+        tv.setText("time :" + this.sk.end().toString());
+
     }
 }

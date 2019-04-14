@@ -16,9 +16,12 @@ public abstract class Game extends AppCompatActivity implements SensorEventListe
     private int index;
     protected List<Stage> stageList = new ArrayList<>();
 
-    public abstract void start();
+    protected abstract void start();
 
-    public abstract void end();
+    /**
+     * The end method is supposed to run after the game has finished.
+     */
+    protected abstract void end();
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
@@ -34,10 +37,7 @@ public abstract class Game extends AppCompatActivity implements SensorEventListe
         // Do nothing, I have no clue what this does.
     }
 
-    /**
-     *
-     * @param i
-     */
+
     public void nextStage(int i){
         if(i != 0) {
             Log.d("NEXTSTAGE", i + "");
@@ -45,7 +45,10 @@ public abstract class Game extends AppCompatActivity implements SensorEventListe
             if(this.index <= stageList.size()-1){
                 currStage = stageList.get(this.index);
                 currStage.onCreate();
+            }else{
+                this.end(); // Out of stages.
             }
+
         }
     }
 }
