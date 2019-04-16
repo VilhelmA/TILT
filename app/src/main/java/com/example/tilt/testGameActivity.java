@@ -19,18 +19,18 @@ public class testGameActivity extends Game {
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        magnoSensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+        magnoSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
 
         sensorManager.registerListener(this, accelSensor, SensorManager.SENSOR_DELAY_GAME);
         sensorManager.registerListener(this, magnoSensor, SensorManager.SENSOR_DELAY_GAME);
 
         StageBuilder builder = new StageBuilder();
-        stageList.add(builder.fail(0).solution(new OrientationDetector(OrientationDetector.UPSIDEDOWN, 1)).build());
-        stageList.add(builder.fail(0).solution(new OrientationDetector(OrientationDetector.VERTICAL, 1)).build());
-        stageList.add(builder.fail(0).solution(new OrientationDetector(OrientationDetector.LEFT90DEG, 1)).build());
-        stageList.add(builder.fail(0).solution(new OrientationDetector(OrientationDetector.RIGHT90DEG, 1)).build());
+//        stageList.add(builder.fail(0).solution(new OrientationDetector(OrientationDetector.UPSIDEDOWN, 1)).build());
+//        stageList.add(builder.fail(0).solution(new OrientationDetector(OrientationDetector.VERTICAL, 1)).build());
+//        stageList.add(builder.fail(0).solution(new OrientationDetector(OrientationDetector.LEFT90DEG, 1)).build());
+//        stageList.add(builder.fail(0).solution(new OrientationDetector(OrientationDetector.RIGHT90DEG, 1)).build());
 
-        stageList.add(builder.fail(0).solution(new AngleDetector(0, 3)).build());
+        stageList.add(builder.fail(0).solution(new AngleDetector(50, 3)).build());
         stageList.add(builder.fail(0).solution(new ShakeDetector()).build());
         stageList.add(builder.fail(0).solution(new AngleDetector(0, 5)).build());
         this.start();
