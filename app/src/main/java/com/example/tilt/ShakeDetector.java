@@ -44,4 +44,9 @@ public class ShakeDetector implements Detector {
     public void configure() {
         Log.d("STARTED STAGE", "SHAKE");
     }
+
+    @Override
+    public String getValue() {
+        return "SHAKE IT BABY";
+    }
 }

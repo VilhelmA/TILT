@@ -8,9 +8,10 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observer;
 
 
-public abstract class Game extends AppCompatActivity implements SensorEventListener  {
+public abstract class Game extends AppCompatActivity implements SensorEventListener, Observer {
     protected ScoreKeeper sk = new ScoreKeeper();
     protected Stage currStage;
     private int index;
@@ -27,6 +28,7 @@ public abstract class Game extends AppCompatActivity implements SensorEventListe
     public void onSensorChanged(SensorEvent sensorEvent) {
         if(currStage == null){
             currStage = stageList.get(index);
+            currStage.onCreate();
         }
         int r = currStage.solve(sensorEvent);
         this.nextStage(r);
@@ -40,12 +42,11 @@ public abstract class Game extends AppCompatActivity implements SensorEventListe
 
     public void nextStage(int i){
         if(i != 0) {
-            Log.d("NEXTSTAGE", i + "");
             this.index = this.index + i;
             if(this.index <= stageList.size()-1){
                 currStage = stageList.get(this.index);
                 currStage.onCreate();
-            }else{
+            } else {
                 this.end(); // Out of stages.
             }
 

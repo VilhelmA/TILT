@@ -11,7 +11,6 @@ public class AngleDetector implements Detector {
     private float successDeg;
     private int accuracy;
 
-    // TODO: Make this work, maybe have it update so that keeps an account of how much the phone has rotated instead of having a startDeg.
     /**
      * Class for detecting if the phone has been pointed in the correct angle.
      * @param successDeg, the angle which we should look for.
@@ -22,6 +21,7 @@ public class AngleDetector implements Detector {
         this.accuracy = accuracy;
     }
 
+    // TODO: THIS DOESNT WORK AS INTENDED, SOMETIMES GIVE LARGE NEGATIVE ANSWER INSTEAD.
     @Override
     public boolean detectEvent(SensorEvent event) {
         if(event.sensor.getType() == Sensor.TYPE_ORIENTATION){ // Deprecated, might still work?
@@ -49,6 +49,11 @@ public class AngleDetector implements Detector {
 
     @Override
     public void configure() {
-        Log.d("STARTED STAGE", "ANGLE");
+        //Log.d("STARTED STAGE", "ANGLE");
+    }
+
+    @Override
+    public String getValue() {
+        return "CURRENT ANGLE: " + this.totalRot;
     }
 }

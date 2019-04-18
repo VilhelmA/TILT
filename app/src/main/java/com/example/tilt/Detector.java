@@ -7,4 +7,6 @@ public interface Detector {
     boolean detectEvent(SensorEvent event);
 
     void configure();
+
+    String getValue();
 }

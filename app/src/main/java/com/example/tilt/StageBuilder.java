@@ -1,8 +1,6 @@
 package com.example.tilt;
 
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-
+import android.net.Uri;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,16 +8,16 @@ import java.util.List;
 public class StageBuilder {
     private List<Detector> failures = new ArrayList<>();
     private Detector solution;
-    private String sound;
-    private String display;
+    private Uri sound;
+    private Uri display;
     private int fail;
 
-    public StageBuilder sound(String sound){
-        this.sound = sound;
+    public StageBuilder sound(String filename){
+        this.sound = Uri.parse("android.resource://com.example.tilt/raw/"+filename);
         return this;
     }
 
-    public StageBuilder display(String display){
+    public StageBuilder display(Uri display){
         this.display = display;
         return this;
     }

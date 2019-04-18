@@ -2,15 +2,20 @@ package com.example.tilt;
 
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import java.io.File;
+import java.util.Observable;
 
 
 public class testGameActivity extends Game {
     private SensorManager sensorManager;
     private Sensor accelSensor;
     private Sensor magnoSensor;
+    private MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +33,17 @@ public class testGameActivity extends Game {
 //        stageList.add(builder.fail(0).solution(new OrientationDetector(OrientationDetector.UPSIDEDOWN, 1)).build());
 //        stageList.add(builder.fail(0).solution(new OrientationDetector(OrientationDetector.VERTICAL, 1)).build());
 //        stageList.add(builder.fail(0).solution(new OrientationDetector(OrientationDetector.LEFT90DEG, 1)).build());
-//        stageList.add(builder.fail(0).solution(new OrientationDetector(OrientationDetector.RIGHT90DEG, 1)).build());
 
-        stageList.add(builder.fail(0).solution(new AngleDetector(50, 3)).build());
-        stageList.add(builder.fail(0).solution(new ShakeDetector()).build());
-        stageList.add(builder.fail(0).solution(new AngleDetector(0, 5)).build());
+        stageList.add(builder.fail(0).sound("hello").solution(new OrientationDetector(OrientationDetector.UPSIDEDOWN, 1)).build());
+        stageList.add(builder.fail(0).sound("shake").solution(new ShakeDetector()).build());
+
+        //stageList.add(builder.fail(0).sound(Uri.fromFile(new File("app/res/raw/shake"))).solution(new AngleDetector(50, 3)).build());
+        //stageList.add(builder.fail(0).sound(Uri.fromFile(new File("app/res/raw/shake"))).solution(new ShakeDetector()).build());
+        //stageList.add(builder.fail(0).sound(Uri.fromFile(new File("app/res/raw/shake"))).solution(new AngleDetector(0, 5)).build());
+
+        for(Stage s : stageList){
+            s.addObserver(this);
+        }
         this.start();
     }
 
@@ -45,6 +56,18 @@ public class testGameActivity extends Game {
     public void end() {
         TextView tv = findViewById(R.id.textView);
         tv.setText("time :" + this.sk.end().toString());
+
+    }
+
+    @Override
+    public void update(Observable observable, Object o) {
+        TextView tv = findViewById(R.id.textView);
+        tv.setText(currStage.solutionValue());
+
+        if(o == "CREATED"){ // Play only on create
+            mp = MediaPlayer.create(this, currStage.sound());
+            mp.start();
+        }
 
     }
 }

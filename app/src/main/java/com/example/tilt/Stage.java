@@ -1,25 +1,29 @@
 package com.example.tilt;
 
 import android.hardware.SensorEvent;
+import android.util.Log;
+
+import android.net.Uri;
 import java.util.List;
+import java.util.Observable;
 
 
-public class Stage {
-    private String sound;
-    private String display;
+public class Stage extends Observable {
+    private Uri sound;
+    private Uri display;
     private Detector solution;
     private List<Detector> failures;
     private int fail;
 
     /**
-     *
+     * Stage
      * @param sound
      * @param display
      * @param solution
      * @param failures
      * @param fail
      */
-    public Stage(String sound, String display, Detector solution, List<Detector> failures, int fail){
+    public Stage(Uri sound, Uri display, Detector solution, List<Detector> failures, int fail){
         this.sound = sound;
         this.display = display;
         this.solution = solution;
@@ -35,26 +39,54 @@ public class Stage {
      */
     public int solve(SensorEvent event){
         if(solution.detectEvent(event)) {
+            setChanged();
+            notifyObservers();
             return 1;
         }
 
         for (Detector d: failures) {
             if(d.detectEvent(event)) {
+                setChanged();
+                notifyObservers();
                 return -fail;
             }
         }
-
+        setChanged();
+        notifyObservers();
         return 0;
     }
 
-    // TODO: Make this thing work. Might have to move it or make it public.
     public void onCreate(){
         for(Detector d : failures){
             d.configure();
         }
         solution.configure();
-        // Configure the solution, e.g. set current direction and such.
-        // Set the stage's display.
-        // Play the sound.
+        setChanged();
+        notifyObservers("CREATED"); // Send "CREATED" as an argument to play sounds and set the display.
+    }
+
+    /**
+     * Value of the solution, depends on the solution and therefore is a String.
+     * @return String, return a String representation of the current value of the solution.
+     */
+
+    public String solutionValue(){
+        return solution.getValue();
+    }
+
+    /**
+     * Returns a URI to the sound that should be played.
+     * @return URI, link to sound that should be played? Might have to change later.
+     */
+    public Uri sound(){
+        return this.sound;
+    }
+
+    /**
+     * Returns a URI to the image to display.
+     * @return URI, link to the image that should be displayed.
+     */
+    public Uri display(){
+        return this.display;
     }
 }
