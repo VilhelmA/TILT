@@ -32,11 +32,8 @@ public class AngleDetector implements Detector {
             }
             float dRot = convertValue(event.values[0], lastRot);
             lastRot = event.values[0];
-            Log.d("DETECTOR", "ROTATED: " + dRot);
             totalRot += dRot;
-            Log.d("TOTAL ROT", ""+ totalRot);
             if(totalRot >= successDeg - accuracy && totalRot <= successDeg + accuracy){
-                Log.d("DETECTOR", "DIR IN IF-CASE");
                 return true;
             }
         }

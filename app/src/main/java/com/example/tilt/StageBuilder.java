@@ -17,8 +17,8 @@ public class StageBuilder {
         return this;
     }
 
-    public StageBuilder display(Uri display){
-        this.display = display;
+    public StageBuilder display(String filename){
+        this.display = Uri.parse("android.resource://com.example.tilt/drawable/"+filename);
         return this;
     }
 
