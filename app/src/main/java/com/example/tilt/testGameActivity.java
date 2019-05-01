@@ -16,6 +16,7 @@ public class testGameActivity extends Game {
     private SensorManager sensorManager;
     private Sensor accelSensor;
     private Sensor magnoSensor;
+    private Sensor rotSensor;
     private MediaPlayer mp;
 
     @Override
@@ -25,11 +26,14 @@ public class testGameActivity extends Game {
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        magnoSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+        magnoSensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+        rotSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
         sensorManager.registerListener(this, accelSensor, SensorManager.SENSOR_DELAY_GAME);
         sensorManager.registerListener(this, magnoSensor, SensorManager.SENSOR_DELAY_GAME);
+        sensorManager.registerListener(this, rotSensor, SensorManager.SENSOR_DELAY_GAME);
 
         StageBuilder builder = new StageBuilder();
+        stageList.add(builder.fail(0).display("shake").sound("shake").solution(new AngleDetector(100,1)).build());
         stageList.add(builder.fail(0).display("upsidedown").sound("hello").solution(new OrientationDetector(OrientationDetector.VERTICALUPSIDEDOWN, 1)).build());
         stageList.add(builder.fail(0).display("shake").sound("shake").solution(new ShakeDetector()).build());
 
