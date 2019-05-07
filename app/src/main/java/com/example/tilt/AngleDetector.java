@@ -31,31 +31,19 @@ public class AngleDetector implements Detector {
 
     @Override
     public boolean detectEvent(SensorEvent event) {
-        if (event.sensor.getType() == Sensor.TYPE_ROTATION_VECTOR) {
-            SensorManager.getRotationMatrixFromVector(rMat, event.values);
-            mAzimuth = (int) (Math.toDegrees(SensorManager.getOrientation(rMat, orientation)[0]) + 360) % 360;
-        }
-
-        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-            System.arraycopy(event.values, 0, mLastAccelerometer, 0, event.values.length);
-            mLastAccelerometerSet = true;
-        } else if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
-            System.arraycopy(event.values, 0, mLastMagnetometer, 0, event.values.length);
-            mLastMagnetometerSet = true;
-        }
-        if (mLastAccelerometerSet && mLastMagnetometerSet) {
-            SensorManager.getRotationMatrix(rMat, null, mLastAccelerometer, mLastMagnetometer);
-            SensorManager.getOrientation(rMat, orientation);
-            mAzimuth = (int) (Math.toDegrees(SensorManager.getOrientation(rMat, orientation)[0]) + 360);
-        }
-
-        mAzimuth = Math.round(mAzimuth);
-        if(!this.start){ // Only runs on first event to set reference.
+        if(!this.start && event.sensor.getType() == Sensor.TYPE_ROTATION_VECTOR){ // Only runs on first event to set reference.
             this.start = true;
-            this.lastRot = mAzimuth;
+            this.lastRot = (int) (Math.toDegrees(SensorManager.getOrientation(rMat, orientation)[0])+360) %360;
             Log.d("TEST", "STARTED");
             return false;
         }
+        if (event.sensor.getType() == Sensor.TYPE_GAME_ROTATION_VECTOR) {
+            SensorManager.getRotationMatrixFromVector(rMat, event.values);
+            mAzimuth = (int) (Math.toDegrees(SensorManager.getOrientation(rMat, orientation)[0])+360) %360;
+        }
+
+        mAzimuth = Math.round(mAzimuth);
+
         int dRot = Math.round(mAzimuth-lastRot);
         Log.d("Rot", "DROT: " + dRot + " mAZ: " + mAzimuth + " LAST: " + lastRot + " TOT: " +totalRot);
         lastRot = mAzimuth;
