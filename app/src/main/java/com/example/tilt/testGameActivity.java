@@ -33,9 +33,12 @@ public class testGameActivity extends Game {
         sensorManager.registerListener(this, rotSensor, SensorManager.SENSOR_DELAY_GAME);
 
         StageBuilder builder = new StageBuilder();
-        stageList.add(builder.fail(0).display("shake").sound("shake").solution(new AngleDetector(200, 1)).failure(new AngleDetector(230, 1)).fail(1).build());
-        stageList.add(builder.fail(0).display("upsidedown").sound("hello").solution(new OrientationDetector(OrientationDetector.VERTICALUPSIDEDOWN, 1)).build());
-        stageList.add(builder.fail(0).display("shake").sound("shake").solution(new ShakeDetector()).build());
+        stageList.add(builder.fail(0).display("standard").startSound("hello").playSound("shake").
+                solution(new AngleDetector(200,1)).build());
+        stageList.add(builder.fail(0).display("standard").startSound("hello").
+                solution(new OrientationDetector(OrientationDetector.VERTICALUPSIDEDOWN, 1)).build());
+        stageList.add(builder.fail(0).display("below").startSound("shake").
+                solution(new ShakeDetector()).build());
 
 
         for(Stage s : stageList){
@@ -59,6 +62,11 @@ public class testGameActivity extends Game {
             mp = MediaPlayer.create(this, currStage.sound());
             ImageView image = findViewById(R.id.img);
             image.setImageURI(currStage.display());
+            mp.start();
+            mp.stop();
+        }
+        if(o == "CHANGED"){
+            mp = MediaPlayer.create(this, currStage.playSound());
             mp.start();
         }
 

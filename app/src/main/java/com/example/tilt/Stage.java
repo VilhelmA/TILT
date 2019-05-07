@@ -9,7 +9,7 @@ import java.util.Observable;
 
 
 public class Stage extends Observable {
-    private Uri sound;
+    private Uri startSound, playSound;
     private Uri display;
     private Detector solution;
     private List<Detector> failures;
@@ -23,12 +23,13 @@ public class Stage extends Observable {
      * @param failures
      * @param fail
      */
-    public Stage(Uri sound, Uri display, Detector solution, List<Detector> failures, int fail){
-        this.sound = sound;
+    public Stage(Uri sound, Uri playSound, Uri display, Detector solution, List<Detector> failures, int fail){
+        this.startSound = sound;
         this.display = display;
         this.solution = solution;
         this.failures = failures;
         this.fail = fail;
+        this.playSound = playSound;
         this.onCreate();
     }
 
@@ -52,7 +53,7 @@ public class Stage extends Observable {
             }
         }
         setChanged();
-        notifyObservers();
+        notifyObservers("CHANGED");
         return 0;
     }
 
@@ -79,7 +80,11 @@ public class Stage extends Observable {
      * @return URI, link to sound that should be played? Might have to change later.
      */
     public Uri sound(){
-        return this.sound;
+        return this.startSound;
+    }
+
+    public Uri playSound(){
+        return this.playSound;
     }
 
     /**
