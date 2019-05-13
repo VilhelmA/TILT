@@ -14,6 +14,9 @@ public class Stage extends Observable {
     private Detector solution;
     private List<Detector> failures;
     private int fail;
+    protected static final int SUCCESS = 1;
+    protected static final int FAIL = -1;
+    protected static final int UPDATE = 10;
 
     /**
      * Stage
@@ -39,22 +42,29 @@ public class Stage extends Observable {
      * @return int, 1 if successful, 0, if nothing happened, -X if unsuccessful, where X is the number of steps backwards.
      */
     public int solve(SensorEvent event){
-        if(solution.detectEvent(event)) {
-            setChanged();
-            notifyObservers();
-            return 1;
+        int result = solution.detectEvent(event);
+        switch (result){
+            case SUCCESS:
+                setChanged();
+                notifyObservers("SUCCESS");
+                return 1;
+
+            case UPDATE:
+                setChanged();
+                notifyObservers("CHANGED");
+                return 0;
         }
 
         for (Detector d: failures) {
-            if(d.detectEvent(event)) {
+            int r = d.detectEvent(event);
+            if(r == FAIL) {
                 setChanged();
                 notifyObservers();
                 return -fail;
             }
         }
-        setChanged();
-        notifyObservers("CHANGED");
         return 0;
+
     }
 
     public void onCreate(){
@@ -62,6 +72,7 @@ public class Stage extends Observable {
             d.configure();
         }
         solution.configure();
+        Log.d("CREATED", "STAGE");
         setChanged();
         notifyObservers("CREATED"); // Send "CREATED" as an argument to play sounds and set the display.
     }

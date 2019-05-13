@@ -7,8 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.io.File;
 import java.util.Observable;
 
 
@@ -18,6 +16,7 @@ public class testGameActivity extends Game {
     private Sensor magnoSensor;
     private Sensor rotSensor;
     private MediaPlayer mp;
+    private static final int[] DISPLAYVALUE = {0, 1};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +32,22 @@ public class testGameActivity extends Game {
         sensorManager.registerListener(this, rotSensor, SensorManager.SENSOR_DELAY_GAME);
 
         StageBuilder builder = new StageBuilder();
-        stageList.add(builder.fail(0).display("standard").startSound("hello").playSound("shake").
-                solution(new AngleDetector(200,1)).build());
-        stageList.add(builder.fail(0).display("standard").startSound("hello").
-                solution(new OrientationDetector(OrientationDetector.VERTICALUPSIDEDOWN, 1)).build());
-        stageList.add(builder.fail(0).display("below").startSound("shake").
-                solution(new ShakeDetector()).build());
+        stageList.add(builder.solution(new OrientationDetector(OrientationDetector.VERTICALUPSIDEDOWN, 3)).fail(0).display("front").startSound("hello").playSound("dialturnshort").build());
+        stageList.add(builder.solution(new OrientationDetector(OrientationDetector.VERTICAL, 3)).fail(0).display("belowfullsize").build());
+        stageList.add(builder.solution(new AngleDetector( 90, 5, 3)).fail(0).playSound("dialturnshort").display("front").build());
+        stageList.add(builder.solution(new AngleDetector( 40, 5, 3)).failure(new AngleDetector(100, 5, 3)).fail(0).playSound("dialturnshort").startSound("safesuccess").display("front1").build());
+        stageList.add(builder.solution(new AngleDetector( 40, 5, 3)).failure(new AngleDetector(30, 5, 3)).fail(1).playSound("dialturnshort").startSound("safesuccess").display("front2").build());
+        stageList.add(builder.solution(new AngleDetector( 70, 5, 3)).failure(new AngleDetector(80, 5, 3)).fail(2).playSound("dialturnshort").startSound("safesuccess").display("front3").build());
 
+
+        /*
+        stageList.add(builder.fail(0).display("front").startSound("hello").playSound("dialturnshort")
+                .solution(new AngleDetector(200,1, 2)).build());
+        stageList.add(builder.fail(0).display("front").startSound("hello").
+                solution(new OrientationDetector(OrientationDetector.VERTICALUPSIDEDOWN, 1)).build());
+        stageList.add(builder.fail(0).display("belowfullsize").startSound("dialturnshort").
+                solution(new ShakeDetector()).build());
+"))*/
 
         for(Stage s : stageList){
             s.addObserver(this);
@@ -62,10 +70,24 @@ public class testGameActivity extends Game {
             mp = MediaPlayer.create(this, currStage.sound());
             ImageView image = findViewById(R.id.img);
             image.setImageURI(currStage.display());
+            image.setScaleType(ImageView.ScaleType.FIT_XY);
+            TextView tv = findViewById(R.id.txtRot);
+            for (int i : DISPLAYVALUE){
+                if(i != this.index){
+                    tv.setText("");
+                }
+            }
             mp.start();
-            mp.stop();
+
         }
         if(o == "CHANGED"){
+            TextView tv = findViewById(R.id.txtRot);
+            tv.setZ(3);
+            for (int i : DISPLAYVALUE){
+                if(i == this.index){
+                    tv.setText(currStage.solutionValue());
+                }
+            }
             mp = MediaPlayer.create(this, currStage.playSound());
             mp.start();
         }

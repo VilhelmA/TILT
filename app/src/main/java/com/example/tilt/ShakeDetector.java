@@ -12,8 +12,7 @@ public class ShakeDetector implements Detector {
     private long mShakeTimestamp = 0;
 
     @Override
-    public boolean detectEvent(SensorEvent event) {
-        Log.d("DETECTOR", "SENSING SHAKES");
+    public int detectEvent(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             float x = event.values[0];
             float y = event.values[1];
@@ -30,14 +29,14 @@ public class ShakeDetector implements Detector {
                 final long now = System.currentTimeMillis();
                 // ignore shake events too close to each other (500ms)
                 if (mShakeTimestamp + SHAKE_SLOP_TIME_MS > now) {
-                    return false;
+                    return FAIL;
                 }else{
                     mShakeTimestamp = now;
-                    return true;
+                    return SUCCESS;
                 }
             }
         }
-        return false;
+        return FAIL;
     }
 
     @Override

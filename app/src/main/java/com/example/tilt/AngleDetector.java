@@ -11,6 +11,7 @@ public class AngleDetector implements Detector {
     private float totalRot;
     private float successDeg;
     private int accuracy;
+    private int update;
     int mAzimuth;
     float[] rMat = new float[9];
     float[] orientation = new float[3];
@@ -24,18 +25,19 @@ public class AngleDetector implements Detector {
      * @param successDeg, the angle which we should look for.
      * @param accuracy,
      */
-    public AngleDetector(float successDeg, int accuracy) {
+    public AngleDetector(float successDeg, int accuracy, int update) {
         this.successDeg = successDeg;
         this.accuracy = accuracy;
+        this.update = update;
     }
 
     @Override
-    public boolean detectEvent(SensorEvent event) {
+    public int detectEvent(SensorEvent event) {
         if(!this.start && event.sensor.getType() == Sensor.TYPE_ROTATION_VECTOR){ // Only runs on first event to set reference.
             this.start = true;
             this.lastRot = (int) (Math.toDegrees(SensorManager.getOrientation(rMat, orientation)[0])+360) %360;
             Log.d("TEST", "STARTED");
-            return false;
+            return FAIL;
         }
         if (event.sensor.getType() == Sensor.TYPE_GAME_ROTATION_VECTOR) {
             SensorManager.getRotationMatrixFromVector(rMat, event.values);
@@ -50,12 +52,14 @@ public class AngleDetector implements Detector {
         totalRot += dRot;
 
         if(totalRot >= successDeg - accuracy && totalRot <= successDeg + accuracy){
-            return true;
+            return SUCCESS;
         }
 
+        if(Math.abs(dRot) >= update){
+            return UPDATE;
+        }
 
-
-        return false;
+        return FAIL;
     }
 
     private float convertValue(float val, float lastRot){
@@ -69,6 +73,6 @@ public class AngleDetector implements Detector {
 
     @Override
     public String getValue() {
-        return "CURRENT ANGLE: " + this.totalRot;
+        return (int) this.totalRot + "";
     }
 }

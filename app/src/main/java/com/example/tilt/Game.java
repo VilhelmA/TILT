@@ -14,7 +14,7 @@ import java.util.Observer;
 public abstract class Game extends AppCompatActivity implements SensorEventListener, Observer {
     protected ScoreKeeper sk = new ScoreKeeper();
     protected Stage currStage;
-    private int index;
+    protected int index;
     protected List<Stage> stageList = new ArrayList<>();
 
     protected abstract void start();

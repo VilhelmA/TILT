@@ -33,16 +33,16 @@ public class OrientationDetector implements Detector {
     }
 
     @Override
-    public boolean detectEvent(SensorEvent event) {
+    public int detectEvent(SensorEvent event) {
         if(event.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
             this.currOrientation = event.values;
             if(isAccurate(event.values[0],successOrientation[0]) && isAccurate(event.values[1], successOrientation[1]) && isAccurate(event.values[2], successOrientation[2])){
                 Log.e("ACC", "ACCURATE");
-                return true;
+                return SUCCESS;
             }
             Log.e("ACC", "NOT ACCURATE");
         }
-        return false;
+        return FAIL;
     }
 
     /**
@@ -61,7 +61,6 @@ public class OrientationDetector implements Detector {
 
     @Override
     public void configure() {
-        Log.e("STAGE", "ORIENTATION");
         // no need to configure.
     }
 
