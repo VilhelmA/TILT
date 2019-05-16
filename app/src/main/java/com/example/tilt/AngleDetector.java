@@ -47,7 +47,7 @@ public class AngleDetector implements Detector {
         mAzimuth = Math.round(mAzimuth);
 
         int dRot = Math.round(mAzimuth-lastRot);
-        Log.d("Rot", "DROT: " + dRot + " mAZ: " + mAzimuth + " LAST: " + lastRot + " TOT: " +totalRot);
+        //Log.d("Rot", "DROT: " + dRot + " mAZ: " + mAzimuth + " LAST: " + lastRot + " TOT: " +totalRot);
         lastRot = mAzimuth;
         totalRot += dRot;
 

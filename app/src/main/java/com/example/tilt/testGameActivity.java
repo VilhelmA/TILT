@@ -67,6 +67,10 @@ public class testGameActivity extends Game {
     public void update(Observable observable, Object o) {
 
         if(o == "CREATED"){ // Play only on create
+            if(mp != null){
+                mp.release();
+            }
+
             mp = MediaPlayer.create(this, currStage.sound());
             ImageView image = findViewById(R.id.img);
             image.setImageURI(currStage.display());
@@ -88,8 +92,13 @@ public class testGameActivity extends Game {
                     tv.setText(currStage.solutionValue());
                 }
             }
-            mp = MediaPlayer.create(this, currStage.playSound());
-            mp.start();
+            if(mp.isPlaying()){
+
+            }else{
+                mp.release();
+                mp = MediaPlayer.create(this, currStage.playSound());
+                mp.start();
+            }
         }
 
     }
