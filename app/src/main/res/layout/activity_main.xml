@@ -22,8 +22,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="128dp"
         android:layout_marginTop="204dp"
+        android:layout_marginEnd="128dp"
         android:onClick="playOnClick"
         android:text="PLAY"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,20 +33,24 @@
         android:id="@+id/btnAchievements"
         android:layout_width="wrap_content"
         android:layout_height="49dp"
-        android:layout_marginStart="108dp"
-        android:layout_marginTop="392dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
         android:text="ACHIEVEMENTS"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btnHighScores" />
 
     <Button
         android:id="@+id/btnHighScores"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="116dp"
-        android:layout_marginTop="320dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
         android:text="HIGH SCORES"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btnPlay" />
 
 </android.support.constraint.ConstraintLayout>
