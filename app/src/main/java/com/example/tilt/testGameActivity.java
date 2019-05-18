@@ -16,6 +16,7 @@ public class testGameActivity extends Game {
     private Sensor magnoSensor;
     private Sensor rotSensor;
     private MediaPlayer mp;
+    private boolean usingPlaySound = false;
     private static final int[] DISPLAYVALUE = {0, 1};
 
     @Override
@@ -35,7 +36,7 @@ public class testGameActivity extends Game {
         stageList.add(builder.solution(new OrientationDetector(OrientationDetector.VERTICALUPSIDEDOWN, 3)).fail(0).display("front").startSound("hello").playSound("dialturnshort").build());
         stageList.add(builder.solution(new OrientationDetector(OrientationDetector.VERTICAL, 3)).fail(0).display("belowfullsize").build());
         stageList.add(builder.solution(new AngleDetector( 90, 5, 3)).fail(0).playSound("dialturnshort").display("front").build());
-        stageList.add(builder.solution(new AngleDetector( 40, 5, 3)).failure(new AngleDetector(100, 5, 3)).fail(0).playSound("dialturnshort").startSound("safesuccess").display("front1").build());
+        stageList.add(builder.solution(new AngleDetector( 40, 5, 3)).failure(new AngleDetector(120, 5, 3)).fail(0).playSound("dialturnshort").startSound("safesuccess").display("front1").build());
         stageList.add(builder.solution(new AngleDetector( 40, 5, 3)).failure(new AngleDetector(30, 5, 3)).fail(1).playSound("dialturnshort").startSound("safesuccess").display("front2").build());
         stageList.add(builder.solution(new AngleDetector( 70, 5, 3)).failure(new AngleDetector(80, 5, 3)).fail(2).playSound("dialturnshort").startSound("safesuccess").display("front3").build());
 
@@ -81,6 +82,7 @@ public class testGameActivity extends Game {
                     tv.setText("");
                 }
             }
+            usingPlaySound = false;
             mp.start();
 
         }
@@ -95,9 +97,12 @@ public class testGameActivity extends Game {
             if(mp.isPlaying()){
 
             }else{
-                mp.release();
-                mp = MediaPlayer.create(this, currStage.playSound());
+                if(!usingPlaySound){
+                    mp = MediaPlayer.create(this, currStage.playSound());
+                    usingPlaySound = true;
+                }
                 mp.start();
+
             }
         }
 
