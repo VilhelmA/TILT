@@ -11,18 +11,29 @@ public class StageBuilder {
     private Uri startSound;
     private Uri playSound;
     private Uri display;
+    private int startID;
+    private int playID;
     private int fail;
 
-    public StageBuilder startSound(String filename){
-        this.startSound = Uri.parse("android.resource://com.example.tilt/raw/"+filename);
+//    public StageBuilder startSound(String filename){
+//        this.startSound = Uri.parse("android.resource://com.example.tilt/raw/"+filename);
+//        return this;
+//    }
+//
+//    public StageBuilder playSound(String filename){
+//        this.playSound = Uri.parse("android.resource://com.example.tilt/raw/"+filename);
+//        return this;
+//    }
+
+    public StageBuilder startSound(int id){
+        this.startID = id;
         return this;
     }
 
-    public StageBuilder playSound(String filename){
-        this.playSound = Uri.parse("android.resource://com.example.tilt/raw/"+filename);
+    public StageBuilder playSound(int id){
+        this.playID = id;
         return this;
     }
-
     public StageBuilder display(String filename){
         this.display = Uri.parse("android.resource://com.example.tilt/drawable/"+filename);
         return this;
@@ -50,7 +61,7 @@ public class StageBuilder {
 
 
     public Stage build(){
-        return new Stage(this.startSound, this.playSound, this.display, this.solution, this.failures, this.fail);
+        return new Stage(this.startSound, this.playSound, this.display, this.solution, this.failures, this.fail, this.startID, this.playID);
     }
 
 

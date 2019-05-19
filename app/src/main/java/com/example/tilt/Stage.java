@@ -14,6 +14,8 @@ public class Stage extends Observable {
     private Detector solution;
     private List<Detector> failures;
     private int fail;
+    private int playID;
+    private int startID;
     protected static final int SUCCESS = 1;
     protected static final int FAIL = -1;
     protected static final int UPDATE = 10;
@@ -26,13 +28,15 @@ public class Stage extends Observable {
      * @param failures
      * @param fail
      */
-    public Stage(Uri sound, Uri playSound, Uri display, Detector solution, List<Detector> failures, int fail){
+    public Stage(Uri sound, Uri playSound, Uri display, Detector solution, List<Detector> failures, int fail, int startID, int playID){
         this.startSound = sound;
         this.display = display;
         this.solution = solution;
         this.failures = failures;
         this.fail = fail;
         this.playSound = playSound;
+        this.startID = startID;
+        this.playID = playID;
         this.onCreate();
     }
 
@@ -90,12 +94,12 @@ public class Stage extends Observable {
      * Returns a URI to the sound that should be played.
      * @return URI, link to sound that should be played? Might have to change later.
      */
-    public Uri sound(){
-        return this.startSound;
+    public int sound(){
+        return this.startID;
     }
 
-    public Uri playSound(){
-        return this.playSound;
+    public int playSound(){
+        return this.playID;
     }
 
     /**
