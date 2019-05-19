@@ -1,29 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/tiltGrey"
     android:layout_height="match_parent"
     tools:context=".testGameActivity">
+
+    <TextView
+        android:id="@+id/txtRot"
+        android:layout_width="125dp"
+        android:layout_height="47dp"
+        android:text="TEST"
+        android:textAlignment="center"
+        android:visibility="visible" />
 
     <ImageView
         android:id="@+id/img"
         android:layout_width="1080px"
-        android:layout_height="2000px"
+        android:layout_height="1920px"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/tiltGrey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.381"
         tools:srcCompat="@tools:sample/backgrounds/scenic[1]" />
-
-    <TextView
-        android:id="@+id/txtRot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="176dp"
-        tools:layout_editor_absoluteY="318dp" />
-</android.support.constraint.ConstraintLayout>
+</FrameLayout>
