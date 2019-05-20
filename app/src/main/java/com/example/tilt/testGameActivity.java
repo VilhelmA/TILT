@@ -1,5 +1,6 @@
 package com.example.tilt;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
@@ -20,7 +21,8 @@ public class testGameActivity extends Game implements SoundPool.OnLoadCompleteLi
     private Sensor magnoSensor;
     private Sensor rotSensor;
     private MediaPlayer mp;
-    private boolean usingPlaySound = false;
+    private int UPDATERATE = 20;
+    private int updateCounter = 0;
     private static final int[] DISPLAYVALUE = {2,3,4,5};
     private SoundPool sp;
     @Override
@@ -40,11 +42,11 @@ public class testGameActivity extends Game implements SoundPool.OnLoadCompleteLi
         StageBuilder builder = new StageBuilder();
         stageList.add(builder.solution(new OrientationDetector(OrientationDetector.VERTICALUPSIDEDOWN, 3)).fail(0).display("front").startSound(R.raw.hello).playSound(R.raw.dialturnshort).build());
         stageList.add(builder.solution(new OrientationDetector(OrientationDetector.VERTICAL, 3)).fail(0).display("belowfullsize").build());
-        stageList.add(builder.solution(new AngleDetector( 90, 5, 1)).fail(0).playSound(R.raw.dialturnshort).display("front").build());
-        stageList.add(builder.solution(new AngleDetector( 40, 5, 1)).failure(new AngleDetector(120, 5, 3)).fail(0).playSound(R.raw.dialturnshort).startSound(R.raw.safesuccess).display("front1").build());
-        stageList.add(builder.solution(new AngleDetector( 40, 5, 1)).failure(new AngleDetector(30, 5, 3)).fail(1).playSound(R.raw.dialturnshort).startSound(R.raw.safesuccess).display("front2").build());
-        stageList.add(builder.solution(new AngleDetector( 70, 5, 1)).failure(new AngleDetector(80, 5, 3)).fail(2).playSound(R.raw.dialturnshort).startSound(R.raw.safesuccess).display("front3").build());
-
+        stageList.add(builder.solution(new AngleDetector( 90, 3, 1)).fail(0).playSound(R.raw.dialturnshorter).display("front").build());
+        stageList.add(builder.solution(new AngleDetector( 40, 3, 1)).fail(1).playSound(R.raw.dialturnshorter).startSound(R.raw.safesuccess).display("front1").failure(new AngleDetector(120, 5, 3)).build());
+        stageList.add(builder.solution(new AngleDetector( 70, 3, 1)).fail(2).playSound(R.raw.dialturnshorter).startSound(R.raw.safesuccess).display("front2").failure(new AngleDetector(120, 5, 3)).build());
+        stageList.add(builder.solution(new AngleDetector( 240, 5, 1)).fail(3).playSound(R.raw.dialturnshorter).startSound(R.raw.safesuccess).display("front3").build());
+        //.failure(new AngleDetector(80, 5, 3))
         for(Stage s : stageList){
             s.addObserver(this);
         }
@@ -57,19 +59,30 @@ public class testGameActivity extends Game implements SoundPool.OnLoadCompleteLi
     }
 
     @Override
-    public void end() { }
+    public void end() { this.sk.end();
+        Intent i = new Intent(this, GameOverActivity.class);
+        i.putExtra("ERRORS", this.sk.getNoOfErrors());
+        i.putExtra("TIME", this.sk.end().toString() );
+        startActivity(i);
+    }
 
     @Override
     public void update(Observable observable, Object o) {
 
         if(o == "CREATED"){ // Play only on create
+            //sp.release();
             int id = sp.load(this, this.currStage.sound(), 0);
             sp.play(id, 3,3, 0, 0, 1);
             configImage();
         }
         if(o == "CHANGED"){
-            int id = sp.load(this, this.currStage.playSound(), 0);
-            sp.play(id, 3,3, 0, 0, 1);
+            //sp.release();
+            updateCounter++;
+            if(updateCounter == UPDATERATE){
+                int id = sp.load(this, this.currStage.playSound(), 0);
+                sp.play(id, 3,3, 0, 0, 1);
+
+            }
             configImage();
         }
 
@@ -84,7 +97,7 @@ public class testGameActivity extends Game implements SoundPool.OnLoadCompleteLi
         for (int i : DISPLAYVALUE){
             if(i == this.index){
                 tv.setText(currStage.solutionValue());
-                tv.setX(250);
+                tv.setX(375);
                 tv.setTextColor(Color.BLACK);
                 tv.setY(700);
                 return;

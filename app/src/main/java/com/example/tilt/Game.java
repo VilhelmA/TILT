@@ -41,15 +41,16 @@ public abstract class Game extends AppCompatActivity implements SensorEventListe
 
 
     public void nextStage(int i){
-        if(i != 0) {
+        if(i != 0){
             this.index = this.index + i;
             if(this.index <= stageList.size()-1){
                 currStage = stageList.get(this.index);
                 currStage.onCreate();
-            } else {
-                this.end(); // Out of stages.
+            }else{
+                Log.d("ENDING", ""+this.index);
+                this.end(); // Run when out of stages
             }
-
         }
+
     }
 }

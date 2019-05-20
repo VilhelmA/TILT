@@ -61,7 +61,7 @@ public class Stage extends Observable {
 
         for (Detector d: failures) {
             int r = d.detectEvent(event);
-            if(r == FAIL) {
+            if(r == SUCCESS) {
                 setChanged();
                 notifyObservers();
                 return -fail;

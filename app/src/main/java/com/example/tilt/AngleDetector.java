@@ -35,8 +35,7 @@ public class AngleDetector implements Detector {
     public int detectEvent(SensorEvent event) {
         if(!this.start && event.sensor.getType() == Sensor.TYPE_ROTATION_VECTOR){ // Only runs on first event to set reference.
             this.start = true;
-            this.lastRot = (int) (Math.toDegrees(SensorManager.getOrientation(rMat, orientation)[0])+360) %360;
-            Log.d("TEST", "STARTED");
+            this.lastRot = (int) (Math.toDegrees(SensorManager.getOrientation(rMat, orientation)[0])+360) % 360;
             return FAIL;
         }
         if (event.sensor.getType() == Sensor.TYPE_GAME_ROTATION_VECTOR) {
@@ -47,7 +46,7 @@ public class AngleDetector implements Detector {
         mAzimuth = Math.round(mAzimuth);
 
         int dRot = Math.round(mAzimuth-lastRot);
-        //Log.d("Rot", "DROT: " + dRot + " mAZ: " + mAzimuth + " LAST: " + lastRot + " TOT: " +totalRot);
+        Log.d("Rot", "DROT: " + dRot + " mAZ: " + mAzimuth + " LAST: " + lastRot + " TOT: " +totalRot);
         lastRot = mAzimuth;
         totalRot += dRot;
 
