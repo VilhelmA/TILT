@@ -15,15 +15,6 @@ public class StageBuilder {
     private int playID;
     private int fail;
 
-//    public StageBuilder startSound(String filename){
-//        this.startSound = Uri.parse("android.resource://com.example.tilt/raw/"+filename);
-//        return this;
-//    }
-//
-//    public StageBuilder playSound(String filename){
-//        this.playSound = Uri.parse("android.resource://com.example.tilt/raw/"+filename);
-//        return this;
-//    }
 
     public StageBuilder startSound(int id){
         this.startID = id;

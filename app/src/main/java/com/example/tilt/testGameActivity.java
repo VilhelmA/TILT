@@ -10,6 +10,7 @@ import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.Observable;
@@ -22,7 +23,7 @@ public class testGameActivity extends Game implements SoundPool.OnLoadCompleteLi
     private Sensor rotSensor;
     private Sensor proxSensor;
     private MediaPlayer mp;
-    private int UPDATERATE = 20;
+    private int UPDATERATE = 10;
     private int updateCounter = 0;
     private static final int[] DISPLAYVALUE = {2,3,4,5};
     private SoundPool sp;
@@ -48,7 +49,7 @@ public class testGameActivity extends Game implements SoundPool.OnLoadCompleteLi
         stageList.add(builder.solution(new AngleDetector( 90, 3, 1)).fail(0).playSound(R.raw.dialturnshorter).display("front").build());
         stageList.add(builder.solution(new AngleDetector( 40, 3, 1)).fail(1).playSound(R.raw.dialturnshorter).startSound(R.raw.safesuccess).display("front1").failure(new AngleDetector(120, 5, 3)).build());
         stageList.add(builder.solution(new AngleDetector( 70, 3, 1)).fail(2).playSound(R.raw.dialturnshorter).startSound(R.raw.safesuccess).display("front2").failure(new AngleDetector(120, 5, 3)).build());
-        stageList.add(builder.solution(new ProximityDetector(4)).fail(3).playSound(R.raw.dialturnshorter).startSound(R.raw.safesuccess).display("front3").build());
+        stageList.add(builder.solution(new ProximityDetector(4)).fail(3).startSound(R.raw.safesuccess).display("front3").build());
         //.failure(new AngleDetector(80, 5, 3))
         for(Stage s : stageList){
             s.addObserver(this);
@@ -61,11 +62,18 @@ public class testGameActivity extends Game implements SoundPool.OnLoadCompleteLi
         this.sk.start();
     }
 
+    private void closeSensors(){
+        sensorManager.unregisterListener(this);
+    }
     @Override
     public void end() { this.sk.end();
+        closeSensors();
         Intent i = new Intent(this, GameOverActivity.class);
-        i.putExtra("ERRORS", this.sk.getNoOfErrors());
-        i.putExtra("TIME", this.sk.end().toString() );
+        long seconds = this.sk.end().getSeconds();
+        int minutes = (int) seconds / 60;
+        seconds = seconds - minutes * 60;
+        i.putExtra("TIME", minutes + ":" + seconds);
+        i.putExtra("STAGE", "SAFE CRACKER");
         startActivity(i);
     }
 
@@ -74,21 +82,25 @@ public class testGameActivity extends Game implements SoundPool.OnLoadCompleteLi
 
         if(o == "CREATED"){ // Play only on create
             //sp.release();
-            int id = sp.load(this, this.currStage.sound(), 0);
-            sp.play(id, 3,3, 0, 0, 1);
-            configImage();
+            if(currStage.sound() != 0){
+                int id = sp.load(this, this.currStage.sound(), 0);
+                sp.play(id, 3,3, 0, 0, 1);
+                configImage();
+            }
+
         }
         if(o == "CHANGED"){
             //sp.release();
             updateCounter++;
             if(updateCounter == UPDATERATE){
-                int id = sp.load(this, this.currStage.playSound(), 0);
-                sp.play(id, 3,3, 0, 0, 1);
-
+                if(currStage.playSound() != 0) {
+                    int id = sp.load(this, this.currStage.playSound(), 0);
+                    sp.play(id, 3, 3, 0, 0, 1);
+                    updateCounter = 0;
+                }
             }
             configImage();
         }
-
     }
     private void configImage(){
         ImageView image = findViewById(R.id.img);
@@ -114,4 +126,19 @@ public class testGameActivity extends Game implements SoundPool.OnLoadCompleteLi
     public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
         soundPool.play(sampleId,4,4,0,0,1);
     }
+
+
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)){
+            sensorManager.unregisterListener(this);
+            finish();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+
 }

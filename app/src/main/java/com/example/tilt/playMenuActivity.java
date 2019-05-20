@@ -48,7 +48,6 @@ public class playMenuActivity extends AppCompatActivity {
     }
 
     public void startGame(View v){
-        Log.d("MYTAG", "STARTING GAME");
         Intent i = new Intent(this, testGameActivity.class);
         startActivity(i);
     }

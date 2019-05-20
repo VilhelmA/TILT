@@ -19,4 +19,8 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, playMenuActivity.class);
         startActivity(i);
     }
+    public void highScoreOnClick(View v){
+        Intent i = new Intent(this, HighScoreActivity.class);
+        startActivity(i);
+    }
 }

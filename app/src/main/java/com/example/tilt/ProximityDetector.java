@@ -16,7 +16,6 @@ public class ProximityDetector implements Detector {
     public int detectEvent(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
             if (event.values[0] >= -SENSOR_SENSITIVITY && event.values[0] <= SENSOR_SENSITIVITY) {
-                Log.d("RETURNING", "SUCCESS");
                 return SUCCESS;
             }
             return UPDATE;
@@ -31,6 +30,6 @@ public class ProximityDetector implements Detector {
 
     @Override
     public String getValue() {
-        return "I AM A SENSOR LUL";
+        return "UNLOCKED";
     }
 }
