@@ -20,6 +20,7 @@ public class testGameActivity extends Game implements SoundPool.OnLoadCompleteLi
     private Sensor accelSensor;
     private Sensor magnoSensor;
     private Sensor rotSensor;
+    private Sensor proxSensor;
     private MediaPlayer mp;
     private int UPDATERATE = 20;
     private int updateCounter = 0;
@@ -35,9 +36,11 @@ public class testGameActivity extends Game implements SoundPool.OnLoadCompleteLi
         accelSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         magnoSensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
         rotSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR);
+        proxSensor= sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
         sensorManager.registerListener(this, accelSensor, SensorManager.SENSOR_DELAY_GAME);
         sensorManager.registerListener(this, magnoSensor, SensorManager.SENSOR_DELAY_GAME);
         sensorManager.registerListener(this, rotSensor, SensorManager.SENSOR_DELAY_GAME);
+        sensorManager.registerListener(this, proxSensor, SensorManager.SENSOR_DELAY_GAME);
 
         StageBuilder builder = new StageBuilder();
         stageList.add(builder.solution(new OrientationDetector(OrientationDetector.VERTICALUPSIDEDOWN, 3)).fail(0).display("front").startSound(R.raw.hello).playSound(R.raw.dialturnshort).build());
@@ -45,7 +48,7 @@ public class testGameActivity extends Game implements SoundPool.OnLoadCompleteLi
         stageList.add(builder.solution(new AngleDetector( 90, 3, 1)).fail(0).playSound(R.raw.dialturnshorter).display("front").build());
         stageList.add(builder.solution(new AngleDetector( 40, 3, 1)).fail(1).playSound(R.raw.dialturnshorter).startSound(R.raw.safesuccess).display("front1").failure(new AngleDetector(120, 5, 3)).build());
         stageList.add(builder.solution(new AngleDetector( 70, 3, 1)).fail(2).playSound(R.raw.dialturnshorter).startSound(R.raw.safesuccess).display("front2").failure(new AngleDetector(120, 5, 3)).build());
-        stageList.add(builder.solution(new AngleDetector( 240, 5, 1)).fail(3).playSound(R.raw.dialturnshorter).startSound(R.raw.safesuccess).display("front3").build());
+        stageList.add(builder.solution(new ProximityDetector(4)).fail(3).playSound(R.raw.dialturnshorter).startSound(R.raw.safesuccess).display("front3").build());
         //.failure(new AngleDetector(80, 5, 3))
         for(Stage s : stageList){
             s.addObserver(this);

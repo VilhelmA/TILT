@@ -40,7 +40,7 @@ public class AngleDetector implements Detector {
         }
         if (event.sensor.getType() == Sensor.TYPE_GAME_ROTATION_VECTOR) {
             SensorManager.getRotationMatrixFromVector(rMat, event.values);
-            mAzimuth = (int) (Math.toDegrees(SensorManager.getOrientation(rMat, orientation)[0])+360) %360;
+            mAzimuth = (int) (Math.toDegrees(SensorManager.getOrientation(rMat, orientation)[0])+360    ) %360;
         }
 
         mAzimuth = Math.round(mAzimuth);
