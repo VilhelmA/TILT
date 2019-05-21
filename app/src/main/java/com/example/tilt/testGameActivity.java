@@ -47,15 +47,15 @@ public class testGameActivity extends Game implements SoundPool.OnLoadCompleteLi
         sensorManager.registerListener(this, lightSensor, SensorManager.SENSOR_DELAY_GAME);
 
         StageBuilder builder = new StageBuilder();
-        stageList.add(builder.solution(new OrientationDetector(OrientationDetector.VERTICALUPSIDEDOWN, 3)).fail(0).display("front").playSound(R.raw.dialturnshort).build());
-        stageList.add(builder.solution(new OrientationDetector(OrientationDetector.VERTICAL, 3)).fail(0).display("belowfullsize").build());
-        stageList.add(builder.solution(new AngleDetector( 90, 3, 1)).fail(0).playSound(R.raw.dialturnshorter).display("front").build());
-        stageList.add(builder.solution(new AngleDetector( 40, 3, 1)).fail(1).playSound(R.raw.dialturnshorter).startSound(R.raw.safesuccess).display("front1").failure(new AngleDetector(120, 5, 3)).build());
-        stageList.add(builder.solution(new AngleDetector( 70, 3, 1)).fail(2).playSound(R.raw.dialturnshorter).startSound(R.raw.safesuccess).display("front2").failure(new AngleDetector(20, 5, 3)).build());
-        stageList.add(builder.solution(new ProximityDetector(4)).fail(3).startSound(R.raw.safesuccess).display("front3").failure(new AngleDetector(400, 5, 3)).build());
-        stageList.add(builder.solution(new LightDetector(2000, 200)).display("dark").build());
-        stageList.add(builder.solution(new ProximityDetector(4)).display("win").build());
-        //.failure(new AngleDetector(80, 5, 3))
+        stageList.add(builder.solution(new OrientationDetector(OrientationDetector.VERTICALUPSIDEDOWN, 4)).fail(0).display("front").playSound(R.raw.dialturnshort).startSound(R.raw.silent).build());
+        stageList.add(builder.solution(new OrientationDetector(OrientationDetector.VERTICAL, 3)).fail(0).display("belowfullsize").startSound(R.raw.swish).build());
+        stageList.add(builder.solution(new AngleDetector( 210, 3, 1)).fail(1).playSound(R.raw.dialturnshorter).startSound(R.raw.swish).display("front").failure(new OrientationDetector(OrientationDetector.VERTICALUPSIDEDOWN, 1)).build());
+        stageList.add(builder.solution(new AngleDetector( 43, 3, 1)).fail(1).playSound(R.raw.dialturnshorter).startSound(R.raw.safesuccess).display("front1").failure(new AngleDetector(220, 5, 3)).build());
+        stageList.add(builder.solution(new AngleDetector( 140, 3, 1)).fail(2).playSound(R.raw.dialturnshorter).startSound(R.raw.safesuccess).display("front2").failure(new AngleDetector(33, 5, 3)).build());
+        stageList.add(builder.solution(new OrientationDetector(OrientationDetector.RIGHT90DEG, 4)).fail(3).startSound(R.raw.safesuccess).display("front3").build());
+        stageList.add(builder.solution(new LightDetector(2000, 300)).display("dark").startSound(R.raw.open).playSound(R.raw.silent).build());
+        stageList.add(builder.solution(new ProximityDetector(4)).display("win").startSound(R.raw.silent).playSound(R.raw.silent).build());
+        
         for(Stage s : stageList){
             s.addObserver(this);
         }

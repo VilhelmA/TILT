@@ -66,6 +66,6 @@ public class OrientationDetector implements Detector {
 
     @Override
     public String getValue() {
-        return "Current orientation:\n\t " + currOrientation[0] + " " + currOrientation[1] + " " + currOrientation[2];
+        return "UNLOCKED";
     }
 }
