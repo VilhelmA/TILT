@@ -49,12 +49,12 @@ public class testGameActivity extends Game implements SoundPool.OnLoadCompleteLi
         StageBuilder builder = new StageBuilder();
         stageList.add(builder.solution(new OrientationDetector(OrientationDetector.VERTICALUPSIDEDOWN, 4)).fail(0).display("front").playSound(R.raw.dialturnshort).startSound(R.raw.silent).build());
         stageList.add(builder.solution(new OrientationDetector(OrientationDetector.VERTICAL, 3)).fail(0).display("belowfullsize").startSound(R.raw.swish).build());
-        stageList.add(builder.solution(new AngleDetector( 210, 3, 1)).fail(1).playSound(R.raw.dialturnshorter).startSound(R.raw.swish).display("front").failure(new OrientationDetector(OrientationDetector.VERTICALUPSIDEDOWN, 1)).build());
+        stageList.add(builder.solution(new AngleDetector( 201, 3, 1)).fail(1).playSound(R.raw.dialturnshorter).startSound(R.raw.swish).display("front").failure(new OrientationDetector(OrientationDetector.VERTICALUPSIDEDOWN, 4)).build());
         stageList.add(builder.solution(new AngleDetector( 43, 3, 1)).fail(1).playSound(R.raw.dialturnshorter).startSound(R.raw.safesuccess).display("front1").failure(new AngleDetector(220, 5, 3)).build());
         stageList.add(builder.solution(new AngleDetector( 140, 3, 1)).fail(2).playSound(R.raw.dialturnshorter).startSound(R.raw.safesuccess).display("front2").failure(new AngleDetector(33, 5, 3)).build());
-        stageList.add(builder.solution(new OrientationDetector(OrientationDetector.RIGHT90DEG, 4)).fail(3).startSound(R.raw.safesuccess).display("front3").build());
-        stageList.add(builder.solution(new LightDetector(2000, 300)).display("dark").startSound(R.raw.open).playSound(R.raw.silent).build());
-        stageList.add(builder.solution(new ProximityDetector(4)).display("win").startSound(R.raw.silent).playSound(R.raw.silent).build());
+        stageList.add(builder.solution(new OrientationDetector(OrientationDetector.RIGHT90DEG, 4)).fail(0).startSound(R.raw.safesuccess).display("front3").failure(new AlwaysFail()).build());
+        stageList.add(builder.solution(new LightDetector(5000)).display("dark").startSound(R.raw.open).playSound(R.raw.silent).failure(new AlwaysFail()).build());
+        stageList.add(builder.solution(new ProximityDetector(4)).display("win").startSound(R.raw.silent).playSound(R.raw.silent).failure(new AlwaysFail()).build());
         
         for(Stage s : stageList){
             s.addObserver(this);

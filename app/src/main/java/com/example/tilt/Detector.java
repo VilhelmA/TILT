@@ -8,7 +8,6 @@ public interface Detector {
     int UPDATE = 10;
     int detectEvent(SensorEvent event);
 
-    void configure();
 
     String getValue();
 }
