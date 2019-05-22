@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0099cc"
+    tools:context=".TutorialActivity">
+
+    <!-- The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc. -->
+
+    <!-- This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows. -->
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="301dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="52dp"
+            android:text="Do NOT expect to use the touch screen at any time during the puzzle."
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="296dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="56dp"
+            android:text="You are about to play a special kind of puzzle."
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <Button
+            android:id="@+id/btnGo"
+            style="@style/Widget.AppCompat.Button.Small"
+            android:layout_width="262dp"
+            android:layout_height="78dp"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="72dp"
+            android:layout_marginBottom="28dp"
+            android:layout_weight="1"
+            android:onClick="onClick"
+            android:text="@string/dummy_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView5"
+            app:layout_constraintVertical_bias="0.522"
+            tools:text="LET'S GO" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="354dp"
+            android:layout_height="79dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="28dp"
+            android:fontFamily="sans-serif"
+            android:text="Welcome to TILT Puzzles!"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="30sp"
+            android:typeface="monospace"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/fullscreen_content_controls"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black_overlay"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="301dp"
+            android:layout_height="123dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="52dp"
+            android:text="Use the phones different sensors, and look for clues to progress in the game. But be careful! Some interactions will move you backwards in the game! "
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="76dp"
+            android:layout_marginEnd="16dp"
+            android:text='Remember to think "outside the box", Have fun!'
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</FrameLayout>

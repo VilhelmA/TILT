@@ -48,7 +48,7 @@ public class playMenuActivity extends AppCompatActivity {
     }
 
     public void startGame(View v){
-        Intent i = new Intent(this, testGameActivity.class);
+        Intent i = new Intent(this, TutorialActivity.class);
         startActivity(i);
     }
 
