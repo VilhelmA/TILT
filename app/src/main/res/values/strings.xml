@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TILT</string>
+    <string name="tutorial">This is a game where you use the phone sensors</string>
 </resources>
