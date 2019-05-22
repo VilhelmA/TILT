@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class playMenuActivity extends AppCompatActivity {
-    private String[] puzzleNames = {"Spin to Win", "Dark room", "Funky Gravity"}; // Tillfällig ersättare för en framtida Factory.
-    private String selected = "testGameActivity";
+    private String[] puzzleNames = {"Safe Cracker"}; // Tillfällig ersättare för en framtida Factory.
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +48,15 @@ public class playMenuActivity extends AppCompatActivity {
     }
 
     public void startGame(View v){
-        Intent i = new Intent(this, TutorialActivity.class);
-        startActivity(i);
+        TextView tv = findViewById(R.id.txtPuzzle);
+        Log.d("txt", tv.getText().toString());
+        if(tv.getText().toString().equals("Safe Cracker")){
+            Intent i = new Intent(this, TutorialActivity.class);
+            startActivity(i);
+        }else{
+            tv.setText("Please pick a puzzle!");
+        }
+
     }
 
     private List<String> getPuzzles(){
