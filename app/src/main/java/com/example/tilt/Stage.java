@@ -12,7 +12,7 @@ public class Stage extends Observable {
     private Uri startSound, playSound;
     private Uri display;
     private Detector solution;
-    private List<Detector> failures;
+    private Detector failure;
     private int fail;
     private int playID;
     private int startID;
@@ -25,14 +25,14 @@ public class Stage extends Observable {
      * @param sound
      * @param display
      * @param solution
-     * @param failures
+     * @param failure
      * @param fail
      */
-    public Stage(Uri sound, Uri playSound, Uri display, Detector solution, List<Detector> failures, int fail, int startID, int playID){
+    public Stage(Uri sound, Uri playSound, Uri display, Detector solution, Detector failure, int fail, int startID, int playID){
         this.startSound = sound;
         this.display = display;
         this.solution = solution;
-        this.failures = failures;
+        this.failure = failure;
         this.fail = fail;
         this.playSound = playSound;
         this.startID = startID;
@@ -58,25 +58,19 @@ public class Stage extends Observable {
                 notifyObservers("CHANGED");
                 return 0;
         }
-
-        for (Detector d: failures) {
-            int r = d.detectEvent(event);
+        if(failure != null){
+            int r = failure.detectEvent(event);
             if(r == SUCCESS) {
                 setChanged();
                 notifyObservers();
                 return -fail;
             }
         }
-        return 0;
 
+        return 0;
     }
 
     public void onCreate(){
-        for(Detector d : failures){
-            d.configure();
-        }
-        solution.configure();
-        Log.d("CREATED", "STAGE");
         setChanged();
         notifyObservers("CREATED"); // Send "CREATED" as an argument to play sounds and set the display.
     }

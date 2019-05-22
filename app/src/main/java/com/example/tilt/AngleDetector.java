@@ -65,10 +65,6 @@ public class AngleDetector implements Detector {
             return Math.round(val - lastRot);
 }
 
-    @Override
-    public void configure() {
-        //Log.d("STARTED STAGE", "ANGLE");
-    }
 
     @Override
     public String getValue() {

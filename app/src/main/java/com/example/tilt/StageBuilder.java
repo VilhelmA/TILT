@@ -1,12 +1,11 @@
 package com.example.tilt;
 
 import android.net.Uri;
-import java.util.ArrayList;
-import java.util.List;
+
 
 
 public class StageBuilder {
-    private List<Detector> failures = new ArrayList<>();
+    private Detector failure;
     private Detector solution;
     private Uri startSound;
     private Uri playSound;
@@ -36,14 +35,11 @@ public class StageBuilder {
     }
 
     public StageBuilder failure(Detector e) {
-        this.failures.add(e);
+        this.failure = e;
         return this;
     }
 
-    public StageBuilder failure(List<Detector> failures){
-        failures.addAll(failures);
-        return this;
-    }
+
 
     public StageBuilder fail(int fail){
         this.fail = fail;
@@ -52,7 +48,7 @@ public class StageBuilder {
 
 
     public Stage build(){
-        return new Stage(this.startSound, this.playSound, this.display, this.solution, this.failures, this.fail, this.startID, this.playID);
+        return new Stage(this.startSound, this.playSound, this.display, this.solution, this.failure, this.fail, this.startID, this.playID);
     }
 
 

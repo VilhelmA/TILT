@@ -23,10 +23,6 @@ public class ProximityDetector implements Detector {
         return FAIL;
     }
 
-    @Override
-    public void configure() {
-        // Do nothing
-    }
 
     @Override
     public String getValue() {
