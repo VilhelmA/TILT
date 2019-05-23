@@ -1,28 +1,27 @@
 package com.example.tilt;
 
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.media.SoundPool;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.Observable;
 
 
-public class testGameActivity extends Game implements SoundPool.OnLoadCompleteListener {
+public class SafeCrackerActivity extends Game implements SoundPool.OnLoadCompleteListener {
     private SensorManager sensorManager;
     private Sensor accelSensor;
     private Sensor magnoSensor;
     private Sensor rotSensor;
     private Sensor proxSensor;
     private Sensor lightSensor;
+    private Sensor tempSensor;
     private int UPDATERATE = 10;
     private int updateCounter = 0;
     private static final int[] DISPLAYVALUE = {2,3,4,5};
@@ -45,8 +44,9 @@ public class testGameActivity extends Game implements SoundPool.OnLoadCompleteLi
         sensorManager.registerListener(this, rotSensor, SensorManager.SENSOR_DELAY_GAME);
         sensorManager.registerListener(this, proxSensor, SensorManager.SENSOR_DELAY_GAME);
         sensorManager.registerListener(this, lightSensor, SensorManager.SENSOR_DELAY_GAME);
-
         StageBuilder builder = new StageBuilder();
+
+
         stageList.add(builder.solution(new OrientationDetector(OrientationDetector.VERTICALUPSIDEDOWN, 4)).fail(0).display("front").playSound(R.raw.dialturnshort).startSound(R.raw.silent).build());
         stageList.add(builder.solution(new OrientationDetector(OrientationDetector.VERTICAL, 3)).fail(0).display("belowfullsize").startSound(R.raw.swish).build());
         stageList.add(builder.solution(new AngleDetector( 201, 3, 1)).fail(1).playSound(R.raw.dialturnshorter).startSound(R.raw.swish).display("front").failure(new OrientationDetector(OrientationDetector.VERTICALUPSIDEDOWN, 4)).build());
@@ -71,7 +71,8 @@ public class testGameActivity extends Game implements SoundPool.OnLoadCompleteLi
         sensorManager.unregisterListener(this);
     }
     @Override
-    public void end() { this.sk.end();
+    public void end() {
+        this.sk.end();
         closeSensors();
         Intent i = new Intent(this, GameOverActivity.class);
         long seconds = this.sk.end().getSeconds();

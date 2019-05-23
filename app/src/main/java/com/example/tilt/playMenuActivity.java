@@ -17,8 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class playMenuActivity extends AppCompatActivity {
-    private String[] puzzleNames = {"Safe Cracker"}; // Tillfällig ersättare för en framtida Factory.
-
+    private String[] puzzleNames = {"Safe Cracker", "Illuminati"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +49,18 @@ public class playMenuActivity extends AppCompatActivity {
     public void startGame(View v){
         TextView tv = findViewById(R.id.txtPuzzle);
         Log.d("txt", tv.getText().toString());
+
         if(tv.getText().toString().equals("Safe Cracker")){
             Intent i = new Intent(this, TutorialActivity.class);
+            i.putExtra("STAGE", "Safe Cracker");
+            startActivity(i);
+        }else if(tv.getText().toString().equals("Illuminati")){
+            Intent i = new Intent(this, TutorialActivity.class);
+            i.putExtra("STAGE", "Illuminati");
             startActivity(i);
         }else{
-            tv.setText("Please pick a puzzle!");
+            tv.setText("Please pick a puzzle");
         }
-
     }
 
     private List<String> getPuzzles(){

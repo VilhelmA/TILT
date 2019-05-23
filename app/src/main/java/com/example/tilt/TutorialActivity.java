@@ -19,14 +19,12 @@ public class TutorialActivity extends AppCompatActivity {
     private List<TextView> tvList = new ArrayList<>();
     private Button btn;
     private int clickCounter = 0;
+    private String chosenPuzzle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
+        chosenPuzzle = getIntent().getStringExtra("STAGE");
         setContentView(R.layout.activity_tutorial);
-
-
     }
 
     @Override
@@ -67,7 +65,13 @@ public class TutorialActivity extends AppCompatActivity {
         }
 
         if(clickCounter == 4){
-            Intent i = new Intent(this, testGameActivity.class);
+            Intent i = null;
+            if(chosenPuzzle.equals("Safe Cracker")){
+                i = new Intent(this, SafeCrackerActivity.class);
+            }else{
+                i = new Intent(this, IlluminatiActivity.class);
+            }
+
             startActivity(i);
         }
 

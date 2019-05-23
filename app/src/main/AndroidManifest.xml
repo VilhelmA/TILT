@@ -3,6 +3,7 @@
     package="com.example.tilt">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:allowBackup="true"
@@ -11,14 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity android:name=".IlluminatiActivity"></activity>
         <activity
             android:name=".TutorialActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_tutorial"
-            android:theme="@style/FullscreenTheme"></activity>
+            android:theme="@style/FullscreenTheme" />
         <activity android:name=".HighScoreActivity" />
         <activity android:name=".GameOverActivity" />
-        <activity android:name=".testGameActivity" />
+        <activity android:name=".SafeCrackerActivity" />
         <activity
             android:name=".playMenuActivity"
             android:parentActivityName=".MainActivity" />
