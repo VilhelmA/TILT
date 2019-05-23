@@ -47,15 +47,16 @@
 
     <TextView
         android:id="@+id/tvOne"
-        android:layout_width="296dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="300dp"
+        android:layout_height="96dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="56dp"
         android:text="You are about to play a special kind of puzzle. Start by putting your phone on a flat surface."
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.915"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv0" />
 
@@ -63,13 +64,14 @@
         android:id="@+id/tvTwo"
         android:layout_width="301dp"
         android:layout_height="70dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="44dp"
         android:layout_marginEnd="58dp"
         android:text="Do NOT expect to use the touch screen at any time during the puzzle."
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.942"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvOne" />
 
@@ -77,13 +79,14 @@
         android:id="@+id/tvThree"
         android:layout_width="301dp"
         android:layout_height="123dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="44dp"
         android:layout_marginEnd="52dp"
         android:text="Use the phones different sensors, and look for clues to progress in the game. But be careful! Some interactions will move you backwards in the game! "
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.844"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTwo" />
 
@@ -91,13 +94,16 @@
         android:id="@+id/tvFour"
         android:layout_width="277dp"
         android:layout_height="48dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginBottom="56dp"
         android:text='Remember to think "outside the box", Have fun!'
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/btnGo"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvThree"
+        app:layout_constraintVertical_bias="1.0" />
 
 </android.support.constraint.ConstraintLayout>

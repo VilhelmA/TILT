@@ -23,7 +23,7 @@ public class IlluminatiActivity extends Game implements SoundPool.OnLoadComplete
     private SoundPool sp;
     private Sensor accelSensor;
     private Sensor proxSensor;
-    private static final int[] VIBRATE = {2};
+    private static final int[] VIBRATE = {1};
     private Vibrator vib;
 
     @Override
@@ -43,10 +43,11 @@ public class IlluminatiActivity extends Game implements SoundPool.OnLoadComplete
         sensorManager.registerListener(this, accelSensor, SensorManager.SENSOR_DELAY_GAME);
         sensorManager.registerListener(this, proxSensor, SensorManager.SENSOR_DELAY_GAME);
 
-        stageList.add(builder.solution(new OrientationDetector(OrientationDetector.UPSIDEDOWN, 1)).fail(0).display("front").startSound(R.raw.hello).build());
-        stageList.add(builder.solution(new ChargeDetector(getApplicationContext())).fail(0).display("front1").startSound(R.raw.lightbulb).build());
-        stageList.add(builder.solution(new ProximityDetector(1)).fail(0).display("front2").startSound(R.raw.ring).build());
-
+        stageList.add(builder.solution(new ChargeDetector(getApplicationContext())).fail(0).display("shade").build());
+        stageList.add(builder.solution(new Waiter(10000)).fail(0).display("plugged").startSound(R.raw.lightbulb).build());
+        stageList.add(builder.solution(new ProximityDetector(1)).fail(0).display("plugged").startSound(R.raw.ring).build());
+        stageList.add(builder.solution(new OrientationDetector(OrientationDetector.UPSIDEDOWN, 1)).fail(0).display("phone").startSound(R.raw.hello).build());
+        
         for(Stage s : stageList){
             s.addObserver(this);
         }
@@ -103,8 +104,9 @@ public class IlluminatiActivity extends Game implements SoundPool.OnLoadComplete
         image.setY(-200);
         for(int i : VIBRATE){
             if(i == this.index){
-                for(int k = 0; k < 30; k++){
-                    vib.vibrate(VibrationEffect.createOneShot(500, 200));
+                for(int k = 0; k < 90; k++){
+                    if(k%3 == 0)
+                        vib.vibrate(VibrationEffect.createOneShot(500, 200));
                 }
             }
         }
