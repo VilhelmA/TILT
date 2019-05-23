@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0099cc"
+    android:background="@color/tiltOrange"
     tools:context=".TutorialActivity">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
@@ -51,7 +51,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="56dp"
-        android:text="You are about to play a special kind of puzzle."
+        android:text="You are about to play a special kind of puzzle. Start by putting your phone on a flat surface."
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:visibility="invisible"
@@ -98,8 +98,6 @@
         android:textSize="18sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/btnGo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
