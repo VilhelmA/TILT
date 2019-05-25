@@ -18,6 +18,7 @@ import java.util.List;
 
 public class playMenuActivity extends AppCompatActivity {
     private String[] puzzleNames = {"Safe Cracker", "Illuminati"};
+    private Integer[] puzzleImages = {R.drawable.front, R.drawable.unplugged};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +28,13 @@ public class playMenuActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         this.setContentView(R.layout.activity_play_menu);
         ListView lvPuzzles = findViewById(R.id.lwPuzzles);
-        List<String> puzzles = getPuzzles();
+        PlayListAdapter adapter=new PlayListAdapter(this, puzzleNames, puzzleImages);
+        lvPuzzles.setAdapter(adapter);
+        /*List<String> puzzles = getPuzzles();
         String[] pNames = new String[puzzles.size()];
         pNames = puzzles.toArray(pNames);
 
-        lvPuzzles.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, pNames));
+        lvPuzzles.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, pNames));*/
         lvPuzzles.setOnItemClickListener(listener());
     }
 
