@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="132dp"
         android:layout_marginEnd="164dp"
-        android:text="High Scores"
+        android:text="@string/highscore_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="108dp"
         android:layout_marginEnd="176dp"
-        android:text="TextView"
+        android:text="@string/no_highscore"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvHighScores" />
 
@@ -33,7 +33,7 @@
         android:layout_marginTop="204dp"
         android:layout_marginEnd="160dp"
         android:onClick="returnToMenu"
-        android:text="Menu"
+        android:text="@string/menu_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvScore" />
 </android.support.constraint.ConstraintLayout>

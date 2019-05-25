@@ -1,7 +1,18 @@
 <resources>
     <string name="app_name">TILT</string>
     <string name="title_activity_tutorial">TutorialActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="tutorial">This is a game where you use the phone sensors</string>
+    <string name="play">PLAY</string>
+    <string name="highscore_button">HIGH SCORES</string>
+    <string name="dummy">DUMMY</string>
+    <string name="select_puzzle">SELECT PUZZLE</string>
+    <string name="highscore_title">HIGH SCORES</string>
+    <string name="menu_button">MENU</string>
+    <string name="no_highscore">No Highscores</string>
+    <string name="next_button">NEXT</string>
+    <string name="tutorial_welcome">Welcome to TILT Puzzles!</string>
+    <string name="tutorial_placement">You are about to play a special kind of puzzle. Start by putting your phone on a flat surface.</string>
+    <string name="tutorial_expectation">Do NOT expect to use the touch screen at any time during the puzzle.</string>
+    <string name="tutorial_clues">Use the phones different sensors, and look for clues to progress in the game. But be careful! Some interactions will move you backwards in the game!</string>
+    <string name="tutorial_fun">Remember to think "outside the box", Have fun!</string>
+    <string name="congratulations">Congratulations!</string>
 </resources>
