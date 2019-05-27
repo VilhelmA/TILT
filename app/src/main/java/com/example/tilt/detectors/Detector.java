@@ -1,4 +1,4 @@
-package com.example.tilt;
+package com.example.tilt.detectors;
 
 import android.hardware.SensorEvent;
 

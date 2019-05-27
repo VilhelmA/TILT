@@ -1,9 +1,10 @@
-package com.example.tilt;
+package com.example.tilt.detectors;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorManager;
-import android.util.Log;
+
+import com.example.tilt.detectors.Detector;
 
 public class ShakeDetector implements Detector {
     private static final float SHAKE_THRESHOLD_GRAVITY = 2.7F;

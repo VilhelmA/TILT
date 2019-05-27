@@ -1,10 +1,12 @@
-package com.example.tilt;
+package com.example.tilt.stages;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+
+import com.example.tilt.ScoreKeeper;
+import com.example.tilt.stages.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,7 @@ public abstract class Game extends AppCompatActivity implements SensorEventListe
     protected Stage currStage;
     protected int index;
     protected List<Stage> stageList = new ArrayList<>();
+    protected StageBuilder builder = new StageBuilder();
 
     protected abstract void start();
 

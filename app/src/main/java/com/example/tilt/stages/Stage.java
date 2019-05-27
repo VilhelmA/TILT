@@ -1,10 +1,11 @@
-package com.example.tilt;
+package com.example.tilt.stages;
 
 import android.hardware.SensorEvent;
-import android.util.Log;
 
 import android.net.Uri;
-import java.util.List;
+
+import com.example.tilt.detectors.Detector;
+
 import java.util.Observable;
 
 

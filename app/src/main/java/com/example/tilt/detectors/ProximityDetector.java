@@ -1,8 +1,7 @@
-package com.example.tilt;
+package com.example.tilt.detectors;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
-import android.util.Log;
 
 public class ProximityDetector implements Detector {
     private int SENSOR_SENSITIVITY;

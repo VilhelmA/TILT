@@ -1,21 +1,23 @@
-package com.example.tilt;
+package com.example.tilt.stages;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.ImageView;
-import android.widget.TextView;
+
+import com.example.tilt.GameOverActivity;
+import com.example.tilt.R;
+import com.example.tilt.Waiter;
+import com.example.tilt.detectors.ChargeDetector;
+import com.example.tilt.detectors.OrientationDetector;
+import com.example.tilt.detectors.ProximityDetector;
 
 import java.util.Observable;
 
@@ -35,8 +37,6 @@ public class IlluminatiActivity extends Game implements SoundPool.OnLoadComplete
         this.sp = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
         this.sp.setOnLoadCompleteListener(this);
         this.vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-
-        StageBuilder builder = new StageBuilder();
 
         accelSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         proxSensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);

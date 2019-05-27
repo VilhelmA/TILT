@@ -1,7 +1,8 @@
-package com.example.tilt;
+package com.example.tilt.stages;
 
 import android.net.Uri;
 
+import com.example.tilt.detectors.Detector;
 
 
 public class StageBuilder {

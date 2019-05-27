@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/tiltGrey"
     tools:context=".playMenuActivity">
 
     <TextView
@@ -27,7 +28,8 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:divider="@color/colorAccent"
+        android:divider="@color/tiltSoftGrey"
+        android:dividerHeight="8.0dp"
         app:layout_constraintBottom_toTopOf="@+id/btnPlay"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

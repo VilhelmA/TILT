@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:background="@color/tiltGrey"
     android:layout_height="match_parent"
-    tools:context=".SafeCrackerActivity">
+    tools:context=".stages.SafeCrackerActivity">
 
     <TextView
         android:id="@+id/txtRot"

@@ -1,9 +1,8 @@
-package com.example.tilt;
+package com.example.tilt.detectors;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorManager;
-import android.util.Log;
 
 public class AngleDetector implements Detector {
     private float lastRot;

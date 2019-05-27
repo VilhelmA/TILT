@@ -1,4 +1,4 @@
-package com.example.tilt;
+package com.example.tilt.stages;
 
 
 import android.content.Intent;
@@ -11,6 +11,15 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.tilt.GameOverActivity;
+import com.example.tilt.R;
+import com.example.tilt.detectors.AlwaysFail;
+import com.example.tilt.detectors.AngleDetector;
+import com.example.tilt.detectors.LightDetector;
+import com.example.tilt.detectors.OrientationDetector;
+import com.example.tilt.detectors.ProximityDetector;
+
 import java.util.Observable;
 
 
@@ -44,7 +53,6 @@ public class SafeCrackerActivity extends Game implements SoundPool.OnLoadComplet
         sensorManager.registerListener(this, rotSensor, SensorManager.SENSOR_DELAY_GAME);
         sensorManager.registerListener(this, proxSensor, SensorManager.SENSOR_DELAY_GAME);
         sensorManager.registerListener(this, lightSensor, SensorManager.SENSOR_DELAY_GAME);
-        StageBuilder builder = new StageBuilder();
 
 
         stageList.add(builder.solution(new OrientationDetector(OrientationDetector.VERTICALUPSIDEDOWN, 4)).fail(0).display("front").playSound(R.raw.dialturnshort).startSound(R.raw.silent).build());

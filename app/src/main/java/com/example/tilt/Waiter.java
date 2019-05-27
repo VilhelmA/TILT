@@ -4,9 +4,7 @@ import android.hardware.SensorEvent;
 import android.os.Handler;
 import android.util.Log;
 
-
-
-
+import com.example.tilt.detectors.Detector;
 
 
 public class Waiter implements Detector {
