@@ -10,6 +10,7 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.example.tilt.GameOverActivity;
@@ -33,6 +34,7 @@ public class IlluminatiActivity extends Game implements SoundPool.OnLoadComplete
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_illuminati);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         this.sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         this.sp = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
         this.sp.setOnLoadCompleteListener(this);
