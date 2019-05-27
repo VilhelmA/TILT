@@ -4,15 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/tiltGrey"
     tools:context=".HighScoreActivity">
 
     <TextView
         android:id="@+id/tvHighScores"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="132dp"
-        android:layout_marginEnd="164dp"
+        android:layout_marginTop="148dp"
+        android:layout_marginEnd="100dp"
         android:text="@string/highscore_title"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,8 +22,8 @@
         android:id="@+id/tvScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
-        android:layout_marginEnd="176dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="164dp"
         android:text="@string/no_highscore"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvHighScores" />
@@ -30,8 +32,8 @@
         android:id="@+id/btnMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="204dp"
-        android:layout_marginEnd="160dp"
+        android:layout_marginTop="196dp"
+        android:layout_marginEnd="156dp"
         android:onClick="returnToMenu"
         android:text="@string/menu_button"
         app:layout_constraintEnd_toEndOf="parent"

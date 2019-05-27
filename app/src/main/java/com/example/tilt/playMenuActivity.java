@@ -1,5 +1,7 @@
 package com.example.tilt;
 
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
@@ -30,11 +33,6 @@ public class playMenuActivity extends AppCompatActivity {
         ListView lvPuzzles = findViewById(R.id.lwPuzzles);
         PlayListAdapter adapter=new PlayListAdapter(this, puzzleNames, puzzleImages);
         lvPuzzles.setAdapter(adapter);
-        /*List<String> puzzles = getPuzzles();
-        String[] pNames = new String[puzzles.size()];
-        pNames = puzzles.toArray(pNames);
-
-        lvPuzzles.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, pNames));*/
         lvPuzzles.setOnItemClickListener(listener());
     }
 
@@ -45,6 +43,15 @@ public class playMenuActivity extends AppCompatActivity {
                 TextView display = findViewById(R.id.txtPuzzle);
                 String s = p.getItemAtPosition(x).toString();
                 display.setText(s);
+
+                ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(
+                        findViewById(R.id.btnPlay),
+                        PropertyValuesHolder.ofFloat("scaleX", 1.4f),
+                        PropertyValuesHolder.ofFloat("scaleY", 1.4f));
+                animator.setDuration(350);
+                animator.setRepeatCount(ObjectAnimator.INFINITE);
+                animator.setRepeatMode(ObjectAnimator.REVERSE);
+                animator.start();
             }
         };
     }

@@ -15,10 +15,7 @@ public class AngleDetector implements Detector {
     int mAzimuth;
     float[] rMat = new float[9];
     float[] orientation = new float[3];
-    private float[] mLastAccelerometer = new float[3];
-    private float[] mLastMagnetometer = new float[3];
-    private boolean mLastAccelerometerSet = false;
-    private boolean mLastMagnetometerSet = false;
+
 
     /**
      * Class for detecting if the phone has been pointed in the correct angle.
@@ -46,7 +43,6 @@ public class AngleDetector implements Detector {
         mAzimuth = Math.round(mAzimuth);
 
         int dRot = Math.round(mAzimuth-lastRot);
-        //Log.d("Rot", "DROT: " + dRot + " mAZ: " + mAzimuth + " LAST: " + lastRot + " TOT: " +totalRot);
         lastRot = mAzimuth;
         totalRot += dRot;
 

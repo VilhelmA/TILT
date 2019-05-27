@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -53,5 +54,10 @@ public class MainActivity extends AppCompatActivity {
     public void highScoreOnClick(View v){
         Intent i = new Intent(this, HighScoreActivity.class);
         startActivity(i);
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        return false;
     }
 }

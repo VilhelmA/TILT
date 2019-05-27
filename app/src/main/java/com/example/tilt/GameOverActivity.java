@@ -2,14 +2,19 @@ package com.example.tilt;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class GameOverActivity extends AppCompatActivity {
+public class GameOverActivity extends AppCompatActivity{
 
+    private SoundPool sp = new SoundPool(2,AudioManager.STREAM_MUSIC, 0);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,6 +23,11 @@ public class GameOverActivity extends AppCompatActivity {
         TextView tvTime = findViewById(R.id.tvTime);
         tvTime.setText("TIME: " + time);
         saveScore(getIntent().getStringExtra("STAGE"), time);
+        playSound();
+    }
+    private void playSound(){
+        MediaPlayer mp = MediaPlayer.create(this, R.raw.congrats);
+        mp.start();
     }
 
     private void saveScore(String stage, String time){

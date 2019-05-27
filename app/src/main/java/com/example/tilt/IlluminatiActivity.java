@@ -13,6 +13,7 @@ import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,8 +43,8 @@ public class IlluminatiActivity extends Game implements SoundPool.OnLoadComplete
 
         sensorManager.registerListener(this, accelSensor, SensorManager.SENSOR_DELAY_GAME);
         sensorManager.registerListener(this, proxSensor, SensorManager.SENSOR_DELAY_GAME);
-
-        stageList.add(builder.solution(new ChargeDetector(getApplicationContext())).fail(0).display("shade").build());
+        Context c = getApplicationContext();
+        stageList.add(builder.solution(new ChargeDetector(c)).fail(0).display("shade").build());
         stageList.add(builder.solution(new Waiter(10000)).fail(0).display("plugged").startSound(R.raw.lightbulb).build());
         stageList.add(builder.solution(new ProximityDetector(1)).fail(0).display("plugged").startSound(R.raw.ring).build());
         stageList.add(builder.solution(new OrientationDetector(OrientationDetector.UPSIDEDOWN, 1)).fail(0).display("phone").startSound(R.raw.hello).build());
@@ -115,5 +116,15 @@ public class IlluminatiActivity extends Game implements SoundPool.OnLoadComplete
     @Override
     public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
         soundPool.play(sampleId,4,4,0,0,1);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)){
+            sensorManager.unregisterListener(this);
+            finish();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

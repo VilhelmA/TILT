@@ -17,7 +17,9 @@ public class HighScoreActivity extends AppCompatActivity {
         TextView tvScore = findViewById(R.id.tvScore);
         SharedPreferences prefs = this.getSharedPreferences("highscores", Context.MODE_PRIVATE);
         String score = prefs.getString("SAFE CRACKER", "Level not completed");
-        tvScore.setText("Safe Cracker: " + score);
+        String illum = prefs.getString("Illuminati", "Level not completed");
+
+        tvScore.setText("Safe Cracker: " + score + "\nIlluminati: " + illum);
     }
 
     public void returnToMenu(View v){
