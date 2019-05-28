@@ -42,20 +42,18 @@ public class TutorialActivity extends AppCompatActivity {
         TextView tv1 = findViewById(R.id.tvOne);
         TextView tv2 = findViewById(R.id.tvTwo);
         TextView tv3 = findViewById(R.id.tvThree);
-        TextView tv4 = findViewById(R.id.tvFour);
         tvList.add(tv1);
         tvList.add(tv2);
         tvList.add(tv3);
-        tvList.add(tv4);
 
 
         btn = findViewById(R.id.btnGo);
 
-        if(clickCounter < 4){
+        if(clickCounter < 3){
             tvList.get(clickCounter).setVisibility(TextView.VISIBLE);
         }
 
-        if(clickCounter > 2){
+        if(clickCounter > 1){
             btn.setText("LET'S GO");
 
             ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(
@@ -68,7 +66,7 @@ public class TutorialActivity extends AppCompatActivity {
             animator.start();
         }
 
-        if(clickCounter == 4){
+        if(clickCounter == 3){
             Intent i = null;
             if(chosenPuzzle.equals("Safe Cracker")){
                 i = new Intent(this, SafeCrackerActivity.class);
